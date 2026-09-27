@@ -1,275 +1,795 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>صفوة للدراسات | Safwah Studies</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<title>SAFWAH INVESTMENT | مركز الدراسات والتحليل الاستثماري</title>
 
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f7f5f0;
-      color: #222;
-      line-height: 1.8;
-    }
+<meta name="description"
+content="مركز الدراسات والتحليل الاستثماري التابع لمجموعة صفوة الاستثمارية. دراسات الجدوى، العناية الواجبة، تحليل الفرص، الدراسات الصناعية والعقارية والاستثمارية.">
 
-    header {
-      background: #17211d;
-      color: white;
-      padding: 70px 25px;
-      text-align: center;
-      border-bottom: 5px solid #b89b5e;
-    }
+<style>
 
-    header h1 {
-      margin: 0;
-      font-size: 42px;
-    }
+:root{
+  --dark:#17211d;
+  --dark2:#202d27;
+  --gold:#b89b5e;
+  --gold2:#d2ba82;
+  --cream:#f7f4ed;
+  --white:#ffffff;
+  --text:#252525;
+  --muted:#6a6a6a;
+  --line:#e4ded1;
+}
 
-    header .en {
-      color: #d1b879;
-      font-size: 24px;
-      margin-top: 5px;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    header p {
-      max-width: 750px;
-      margin: 20px auto 0;
-      color: #e5e5e5;
-      font-size: 18px;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    nav {
-      background: white;
-      text-align: center;
-      padding: 16px;
-      border-bottom: 1px solid #ddd;
-    }
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  line-height:1.9;
+}
 
-    nav a {
-      color: #17211d;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-    }
+/* ==============================
+   TOP BAR
+============================== */
 
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 50px 25px;
-    }
+.topbar{
+  background:#101814;
+  color:#ddd;
+  padding:8px 25px;
+  font-size:13px;
+}
 
-    .intro {
-      text-align: center;
-      margin-bottom: 50px;
-    }
+.topbar-inner{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
 
-    .intro h2 {
-      color: #17211d;
-      font-size: 30px;
-    }
+.topbar a{
+  color:var(--gold2);
+  text-decoration:none;
+}
 
-    .gold-line {
-      width: 70px;
-      height: 3px;
-      background: #b89b5e;
-      margin: 15px auto 25px;
-    }
+/* ==============================
+   NAVIGATION
+============================== */
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-    }
+nav{
+  background:var(--dark);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .card {
-      background: white;
-      padding: 28px;
-      border-radius: 8px;
-      border-top: 4px solid #b89b5e;
-      box-shadow: 0 4px 15px rgba(0,0,0,.06);
-    }
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:16px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
 
-    .card h3 {
-      color: #17211d;
-      margin-top: 0;
-    }
+.brand{
+  color:white;
+  font-weight:bold;
+  font-size:18px;
+  line-height:1.4;
+}
 
-    .studies {
-      margin-top: 60px;
-    }
+.brand span{
+  display:block;
+  color:var(--gold2);
+  font-size:11px;
+  letter-spacing:2px;
+  direction:ltr;
+}
 
-    .study {
-      background: white;
-      padding: 25px;
-      margin-bottom: 15px;
-      border-right: 4px solid #b89b5e;
-    }
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+}
 
-    .study h3 {
-      margin: 0 0 8px;
-      color: #17211d;
-    }
+.nav-links a{
+  color:#eee;
+  text-decoration:none;
+  font-size:14px;
+}
 
-    .tag {
-      display: inline-block;
-      background: #eee8da;
-      color: #725f32;
-      padding: 3px 10px;
-      border-radius: 15px;
-      font-size: 13px;
-    }
+.nav-links a:hover{
+  color:var(--gold2);
+}
 
-    footer {
-      background: #17211d;
-      color: #ccc;
-      text-align: center;
-      padding: 35px 20px;
-      margin-top: 50px;
-    }
+/* ==============================
+   HERO
+============================== */
 
-    footer strong {
-      color: #d1b879;
-    }
+.hero{
+  background:
+    linear-gradient(135deg,rgba(23,33,29,.98),rgba(32,45,39,.94));
+  color:white;
+  padding:100px 25px 90px;
+  border-bottom:5px solid var(--gold);
+}
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 31px;
-      }
+.hero-inner{
+  max-width:1200px;
+  margin:auto;
+}
 
-      header .en {
-        font-size: 19px;
-      }
+.eyebrow{
+  color:var(--gold2);
+  font-size:14px;
+  letter-spacing:1px;
+  margin-bottom:12px;
+}
 
-      nav a {
-        display: inline-block;
-        margin: 5px 8px;
-      }
-    }
-  </style>
+.hero h1{
+  font-size:48px;
+  line-height:1.35;
+  margin:0;
+}
+
+.hero-en{
+  direction:ltr;
+  text-align:right;
+  color:var(--gold2);
+  font-size:29px;
+  font-weight:bold;
+  letter-spacing:3px;
+  margin-top:4px;
+}
+
+.hero h2{
+  margin:30px 0 8px;
+  font-size:23px;
+  font-weight:normal;
+}
+
+.hero p{
+  max-width:800px;
+  color:#ddd;
+  font-size:17px;
+  margin-bottom:30px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-block;
+  padding:11px 22px;
+  border-radius:4px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.btn-gold{
+  background:var(--gold);
+  color:#17211d;
+}
+
+.btn-outline{
+  border:1px solid var(--gold);
+  color:var(--gold2);
+}
+
+/* ==============================
+   METRICS
+============================== */
+
+.metrics{
+  max-width:1200px;
+  margin:-35px auto 0;
+  padding:0 25px;
+  position:relative;
+  z-index:2;
+}
+
+.metrics-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:white;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.metric{
+  padding:27px 20px;
+  text-align:center;
+  border-left:1px solid var(--line);
+}
+
+.metric:last-child{
+  border-left:0;
+}
+
+.metric strong{
+  display:block;
+  color:var(--dark);
+  font-size:24px;
+}
+
+.metric span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* ==============================
+   GENERAL
+============================== */
+
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:75px 25px;
+}
+
+section{
+  margin-bottom:85px;
+}
+
+.section-head{
+  margin-bottom:35px;
+}
+
+.section-kicker{
+  color:#8a713e;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.section-head h2{
+  margin:5px 0;
+  color:var(--dark);
+  font-size:32px;
+}
+
+.line{
+  width:65px;
+  height:3px;
+  background:var(--gold);
+  margin-top:13px;
+}
+
+.section-head p{
+  max-width:800px;
+  color:var(--muted);
+}
+
+/* ==============================
+   ABOUT
+============================== */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:35px;
+}
+
+.about-box{
+  background:white;
+  padding:35px;
+  border:1px solid var(--line);
+}
+
+.about-box h3{
+  color:var(--dark);
+  margin-top:0;
+}
+
+.quote-box{
+  background:var(--dark);
+  color:white;
+  padding:35px;
+  border-right:5px solid var(--gold);
+}
+
+.quote-box strong{
+  display:block;
+  color:var(--gold2);
+  margin-bottom:10px;
+}
+
+/* ==============================
+   FIELDS
+============================== */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:30px;
+  border-top:4px solid var(--gold);
+  box-shadow:0 4px 15px rgba(0,0,0,.04);
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card .num{
+  color:var(--gold);
+  font-size:13px;
+  font-weight:bold;
+}
+
+.card h3{
+  color:var(--dark);
+  margin:7px 0 10px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  margin:0;
+}
+
+/* ==============================
+   METHODOLOGY
+============================== */
+
+.method{
+  background:var(--dark);
+  padding:50px;
+  color:white;
+}
+
+.method .section-head h2{
+  color:white;
+}
+
+.method .section-kicker{
+  color:var(--gold2);
+}
+
+.method-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  background:rgba(255,255,255,.12);
+  margin-top:35px;
+}
+
+.step{
+  background:var(--dark2);
+  padding:25px 20px;
+}
+
+.step span{
+  color:var(--gold2);
+  font-weight:bold;
+  font-size:12px;
+}
+
+.step h3{
+  font-size:16px;
+  margin:8px 0;
+}
+
+.step p{
+  color:#ccc;
+  font-size:13px;
+  margin:0;
+}
+
+/* ==============================
+   STUDIES
+============================== */
+
+.study-list{
+  display:grid;
+  gap:15px;
+}
+
+.study{
+  background:white;
+  padding:25px 30px;
+  border-right:5px solid var(--gold);
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:25px;
+}
+
+.study h3{
+  color:var(--dark);
+  margin:4px 0;
+}
+
+.study p{
+  color:var(--muted);
+  margin:0;
+  font-size:14px;
+}
+
+.tag{
+  display:inline-block;
+  background:#eee7d8;
+  color:#725d31;
+  padding:3px 11px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.study-action{
+  color:var(--gold);
+  font-weight:bold;
+  font-size:14px;
+}
+
+/* ==============================
+   SAFWAH GROUP
+============================== */
+
+.group{
+  background:white;
+  border:1px solid var(--line);
+}
+
+.group-intro{
+  padding:45px;
+}
+
+.group-services{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  border-top:1px solid var(--line);
+}
+
+.service{
+  padding:25px 18px;
+  border-left:1px solid var(--line);
+  text-align:center;
+}
+
+.service:last-child{
+  border-left:0;
+}
+
+.service strong{
+  display:block;
+  color:var(--dark);
+}
+
+/* ==============================
+   VALUES
+============================== */
+
+.values{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.value{
+  background:#ece5d6;
+  color:#665329;
+  padding:10px 18px;
+  border-radius:25px;
+  font-size:13px;
+}
+
+/* ==============================
+   NOTICE
+============================== */
+
+.notice{
+  background:#eee9df;
+  padding:25px 30px;
+  border-right:4px solid var(--gold);
+  color:#555;
+  font-size:13px;
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+footer{
+  background:#101814;
+  color:#ccc;
+  padding:60px 25px 25px;
+}
+
+.footer-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1.2fr;
+  gap:40px;
+}
+
+.footer-title{
+  color:white;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.footer-title-en{
+  color:var(--gold2);
+  direction:ltr;
+  text-align:right;
+  letter-spacing:2px;
+  font-size:14px;
+}
+
+footer h3{
+  color:var(--gold2);
+  font-size:15px;
+  margin-top:0;
+}
+
+footer p,
+footer li{
+  color:#aaa;
+  font-size:13px;
+}
+
+footer ul{
+  list-style:none;
+  padding:0;
+}
+
+footer a{
+  color:#ddd;
+  text-decoration:none;
+}
+
+footer a:hover{
+  color:var(--gold2);
+}
+
+.footer-bottom{
+  max-width:1200px;
+  margin:40px auto 0;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.1);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#777;
+  font-size:12px;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media(max-width:900px){
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .metrics-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .method-grid{
+    grid-template-columns:1fr;
+  }
+
+  .group-services{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .topbar-inner{
+    display:block;
+    text-align:center;
+  }
+
+  .nav-inner{
+    display:block;
+    text-align:center;
+  }
+
+  .nav-links{
+    justify-content:center;
+    margin-top:12px;
+  }
+
+  .hero{
+    padding:65px 20px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  .hero-en{
+    font-size:21px;
+    text-align:center;
+  }
+
+  .hero-inner{
+    text-align:center;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .metrics-grid,
+  .grid,
+  .group-services,
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .metric,
+  .service{
+    border-left:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .study{
+    grid-template-columns:1fr;
+  }
+
+  .method{
+    padding:35px 22px;
+  }
+
+  .footer-bottom{
+    display:block;
+    text-align:center;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
-  <h1>صفوة للدراسات</h1>
-  <div class="en">SAFWAH STUDIES</div>
-
-  <p>
-    مركز متخصص في الدراسات الاستثمارية ودراسات ما قبل الجدوى
-    والعناية الواجبة وتحليل الفرص والمشروعات.
-  </p>
-</header>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div>المملكة العربية السعودية · المدينة المنورة</div>
+    <div>
+      مركز الدراسات والتحليل الاستثماري
+    </div>
+  </div>
+</div>
 
 <nav>
-  <a href="#about">عن المركز</a>
-  <a href="#fields">مجالات الدراسات</a>
-  <a href="#studies">الدراسات</a>
+  <div class="nav-inner">
+
+    <div class="brand">
+      صفوة الاستثمارية
+      <span>SAFWAH INVESTMENT</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="#about">عن المركز</a>
+      <a href="#fields">مجالات الدراسات</a>
+      <a href="#method">المنهجية</a>
+      <a href="#studies">الدراسات</a>
+      <a href="#group">عن صفوة</a>
+    </div>
+
+  </div>
 </nav>
+
+<header class="hero">
+
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      مجموعة صفوة الاستثمارية
+    </div>
+
+    <h1>صفوة الاستثمارية</h1>
+
+    <div class="hero-en">
+      SAFWAH INVESTMENT
+    </div>
+
+    <h2>
+      مركز الدراسات والتحليل الاستثماري
+    </h2>
+
+    <p>
+      منصة متخصصة لدراسة الفرص والمشروعات،
+      وإجراء دراسات ما قبل الجدوى والعناية الواجبة
+      والتحليل الاستثماري والصناعي والعقاري،
+      بما يدعم اتخاذ القرار على أسس تحليلية قابلة للقياس والتحقق.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a class="btn btn-gold" href="#studies">
+        استعرض الدراسات
+      </a>
+
+      <a class="btn btn-outline"
+         href="https://safwah-group.com/"
+         target="_blank">
+        الموقع الرسمي للمجموعة
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+<div class="metrics">
+
+  <div class="metrics-grid">
+
+    <div class="metric">
+      <strong>2016</strong>
+      <span>تأسيس مجموعة صفوة الاستثمارية</span>
+    </div>
+
+    <div class="metric">
+      <strong>6</strong>
+      <span>مسارات رئيسية للدراسات</span>
+    </div>
+
+    <div class="metric">
+      <strong>5</strong>
+      <span>مراحل منهجية للتحليل</span>
+    </div>
+
+    <div class="metric">
+      <strong>KSA</strong>
+      <span>السوق السعودي محور أعمال المجموعة</span>
+    </div>
+
+  </div>
+
+</div>
 
 <main>
 
-  <section class="intro" id="about">
-    <h2>مركز صفوة للدراسات</h2>
-    <div class="gold-line"></div>
+<section id="about">
 
-    <p>
-      منصة معرفية تجمع الدراسات والتحليلات التي تعدها صفوة لدعم
-      القرارات الاستثمارية والتجارية، وتحويل الفرص والأفكار إلى
-      نماذج قابلة للتحليل والقياس واتخاذ القرار.
-    </p>
+  <div class="section-head">
+    <div class="section-kicker">SAFWAH INVESTMENT</div>
+    <h2>مركز الدراسات والتحليل الاستثماري</h2>
+    <div class="line"></div>
+  </div>
 
-   <p>
-  <strong>إعداد وتحليل: خبراء مجموعة صفوة الاستثمارية</strong>
-</p>
-  </section>
+  <div class="about-grid">
 
-  <section id="fields">
-    <div class="categories">
-
-      <div class="card">
-        <h3>دراسات الجدوى</h3>
-        <p>
-          تحليل المشاريع ونماذج الأعمال والافتراضات المالية
-          وتحديد شروط الانتقال إلى الدراسة التفصيلية.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>العناية الواجبة</h3>
-        <p>
-          مراجعة الفرص الاستثمارية والعقود والمخاطر
-          والافتراضات قبل اتخاذ القرار.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>الدراسات الاستثمارية</h3>
-        <p>
-          تقييم الفرص والصناديق والمشروعات
-          وتحليل العوائد والمخاطر.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>الدراسات الصناعية</h3>
-        <p>
-          تحليل المصانع وسلاسل الإمداد والتكاليف
-          والأسواق وخطط التشغيل.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>الدراسات العقارية</h3>
-        <p>
-          تحليل الفرص العقارية والتطوير
-          والاستثمار ونماذج الإيرادات.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>مراجعة السياسات</h3>
-        <p>
-          تحويل التصورات والمبادرات إلى نماذج
-          قابلة للتنفيذ والقياس واتخاذ القرار.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="studies" id="studies">
-
-    <div class="intro">
-      <h2>الدراسات والمشاريع</h2>
-      <div class="gold-line"></div>
-      <p>
-        ستضاف دراسات ومشاريع صفوة تباعًا إلى هذه المكتبة.
-      </p>
-    </div>
-
-    <div class="study">
-      <span class="tag">قيد الإضافة</span>
-      <h3>مكتبة دراسات صفوة</h3>
-      <p>
-        يجري تنظيم الدراسات والمشروعات وإتاحتها من خلال المركز.
-      </p>
-    </div>
-
-  </section>
-
-</main>
-
-<footer>
-  <strong>صفوة للدراسات | SAFWAH STUDIES</strong>
-  <br>
-  © 2026 جميع الحقوق محفوظة
-</footer>
-
-</body>
-</html>
+    <div class="
