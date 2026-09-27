@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,789 +8,715 @@
 <title>SAFWAH INVESTMENT | مركز الدراسات والتحليل الاستثماري</title>
 
 <meta name="description"
-content="مركز الدراسات والتحليل الاستثماري التابع لمجموعة صفوة الاستثمارية. دراسات الجدوى، العناية الواجبة، تحليل الفرص، الدراسات الصناعية والعقارية والاستثمارية.">
+content="مركز الدراسات والتحليل الاستثماري التابع لمجموعة صفوة الاستثمارية - دراسات الجدوى والعناية الواجبة وتحليل الفرص الاستثمارية والعقارية والصناعية.">
 
 <style>
 
+/* =========================================================
+   SAFWAH INVESTMENT
+   Investment Studies & Analysis Center
+========================================================= */
+
 :root{
-  --dark:#17211d;
-  --dark2:#202d27;
-  --gold:#b89b5e;
-  --gold2:#d2ba82;
-  --cream:#f7f4ed;
-  --white:#ffffff;
-  --text:#252525;
-  --muted:#6a6a6a;
-  --line:#e4ded1;
+    --navy:#071c2c;
+    --navy2:#0c2a3d;
+    --navy3:#12384c;
+    --gold:#c5a35a;
+    --gold2:#e0c783;
+    --cream:#f6f2e8;
+    --paper:#ffffff;
+    --text:#17212b;
+    --muted:#68737c;
+    --line:#e7e2d8;
+    --green:#2e6758;
 }
 
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-  background:var(--cream);
-  color:var(--text);
-  line-height:1.9;
+    margin:0;
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+    background:#f7f7f5;
+    color:var(--text);
+    line-height:1.9;
 }
 
-/* ==============================
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+
+/* =========================================================
    TOP BAR
-============================== */
+========================================================= */
 
 .topbar{
-  background:#101814;
-  color:#ddd;
-  padding:8px 25px;
-  font-size:13px;
+    background:#04131f;
+    color:#cdd5da;
+    font-size:13px;
+    padding:8px 0;
 }
 
 .topbar-inner{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
 }
 
-.topbar a{
-  color:var(--gold2);
-  text-decoration:none;
+.topbar-en{
+    direction:ltr;
 }
 
-/* ==============================
-   NAVIGATION
-============================== */
 
-nav{
-  background:var(--dark);
-  border-bottom:1px solid rgba(255,255,255,.1);
-  position:sticky;
-  top:0;
-  z-index:1000;
+/* =========================================================
+   NAV
+========================================================= */
+
+.nav{
+    background:rgba(7,28,44,.98);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    position:sticky;
+    top:0;
+    z-index:999;
 }
 
 .nav-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:25px;
+    min-height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
 }
 
 .brand{
-  color:white;
-  font-weight:bold;
-  font-size:18px;
-  line-height:1.4;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:white;
 }
 
-.brand span{
-  display:block;
-  color:var(--gold2);
-  font-size:11px;
-  letter-spacing:2px;
-  direction:ltr;
+.brand-mark{
+    width:48px;
+    height:48px;
+    border:2px solid var(--gold);
+    transform:rotate(45deg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brand-mark span{
+    transform:rotate(-45deg);
+    color:var(--gold2);
+    font-weight:800;
+    font-size:18px;
+}
+
+.brand-text strong{
+    display:block;
+    color:white;
+    font-size:18px;
+    line-height:1.25;
+}
+
+.brand-text small{
+    color:var(--gold2);
+    font-size:11px;
+    letter-spacing:1.5px;
+    direction:ltr;
+    display:block;
 }
 
 .nav-links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:22px;
+    display:flex;
+    align-items:center;
+    gap:24px;
 }
 
 .nav-links a{
-  color:#eee;
-  text-decoration:none;
-  font-size:14px;
+    color:#e7ecef;
+    font-size:14px;
+    transition:.2s;
 }
 
 .nav-links a:hover{
-  color:var(--gold2);
+    color:var(--gold2);
 }
 
-/* ==============================
+.nav-button{
+    border:1px solid var(--gold);
+    color:var(--gold2)!important;
+    padding:8px 15px;
+    border-radius:4px;
+}
+
+
+/* =========================================================
    HERO
-============================== */
+========================================================= */
 
 .hero{
-  background:
-    linear-gradient(135deg,rgba(23,33,29,.98),rgba(32,45,39,.94));
-  color:white;
-  padding:100px 25px 90px;
-  border-bottom:5px solid var(--gold);
+    background:
+        radial-gradient(circle at 15% 20%,rgba(197,163,90,.17),transparent 30%),
+        radial-gradient(circle at 85% 80%,rgba(197,163,90,.10),transparent 27%),
+        linear-gradient(135deg,#061a29 0%,#0b2b3f 55%,#071c2c 100%);
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border:1px solid rgba(197,163,90,.18);
+    transform:rotate(45deg);
+    left:-250px;
+    top:-210px;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border:1px solid rgba(197,163,90,.15);
+    transform:rotate(45deg);
+    right:-190px;
+    bottom:-170px;
 }
 
 .hero-inner{
-  max-width:1200px;
-  margin:auto;
+    min-height:570px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    z-index:2;
+    padding:85px 0;
+}
+
+.hero-content{
+    max-width:850px;
 }
 
 .eyebrow{
-  color:var(--gold2);
-  font-size:14px;
-  letter-spacing:1px;
-  margin-bottom:12px;
+    color:var(--gold2);
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.5px;
+    margin-bottom:16px;
 }
 
 .hero h1{
-  font-size:48px;
-  line-height:1.35;
-  margin:0;
+    font-size:56px;
+    line-height:1.25;
+    margin:0;
+    font-weight:800;
 }
 
-.hero-en{
-  direction:ltr;
-  text-align:right;
-  color:var(--gold2);
-  font-size:29px;
-  font-weight:bold;
-  letter-spacing:3px;
-  margin-top:4px;
+.hero h1 span{
+    display:block;
+    color:var(--gold2);
+    font-size:36px;
+    direction:ltr;
+    text-align:right;
+    margin-top:7px;
 }
 
 .hero h2{
-  margin:30px 0 8px;
-  font-size:23px;
-  font-weight:normal;
+    font-size:23px;
+    font-weight:400;
+    margin:22px 0 12px;
 }
 
 .hero p{
-  max-width:800px;
-  color:#ddd;
-  font-size:17px;
-  margin-bottom:30px;
+    max-width:750px;
+    color:#d5dde1;
+    font-size:17px;
+    margin:0 0 30px;
 }
 
-.hero-buttons{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
 }
 
 .btn{
-  display:inline-block;
-  padding:11px 22px;
-  border-radius:4px;
-  text-decoration:none;
-  font-weight:bold;
-  font-size:14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:46px;
+    padding:9px 22px;
+    border-radius:4px;
+    font-weight:700;
+    font-size:14px;
+    transition:.2s;
 }
 
 .btn-gold{
-  background:var(--gold);
-  color:#17211d;
+    background:var(--gold);
+    color:#071c2c;
+}
+
+.btn-gold:hover{
+    background:var(--gold2);
 }
 
 .btn-outline{
-  border:1px solid var(--gold);
-  color:var(--gold2);
+    border:1px solid rgba(255,255,255,.35);
+    color:white;
 }
 
-/* ==============================
+.btn-outline:hover{
+    border-color:var(--gold);
+    color:var(--gold2);
+}
+
+
+/* =========================================================
    METRICS
-============================== */
+========================================================= */
 
 .metrics{
-  max-width:1200px;
-  margin:-35px auto 0;
-  padding:0 25px;
-  position:relative;
-  z-index:2;
-}
-
-.metrics-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  background:white;
-  box-shadow:0 10px 35px rgba(0,0,0,.08);
+    background:white;
+    margin-top:-45px;
+    position:relative;
+    z-index:10;
+    box-shadow:0 15px 40px rgba(5,24,38,.10);
+    border-radius:7px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    overflow:hidden;
 }
 
 .metric{
-  padding:27px 20px;
-  text-align:center;
-  border-left:1px solid var(--line);
+    padding:27px 20px;
+    text-align:center;
+    border-left:1px solid var(--line);
 }
 
 .metric:last-child{
-  border-left:0;
+    border-left:0;
 }
 
 .metric strong{
-  display:block;
-  color:var(--dark);
-  font-size:24px;
+    display:block;
+    font-size:26px;
+    color:var(--navy);
 }
 
 .metric span{
-  color:var(--muted);
-  font-size:13px;
+    display:block;
+    color:var(--muted);
+    font-size:13px;
 }
 
-/* ==============================
-   GENERAL
-============================== */
 
-main{
-  max-width:1200px;
-  margin:auto;
-  padding:75px 25px;
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+    padding:90px 0;
 }
 
-section{
-  margin-bottom:85px;
+.section-soft{
+    background:var(--cream);
+}
+
+.section-dark{
+    background:var(--navy);
+    color:white;
 }
 
 .section-head{
-  margin-bottom:35px;
+    margin-bottom:45px;
 }
 
 .section-kicker{
-  color:#8a713e;
-  font-size:13px;
-  font-weight:bold;
+    color:#9a7936;
+    font-weight:800;
+    font-size:13px;
 }
 
-.section-head h2{
-  margin:5px 0;
-  color:var(--dark);
-  font-size:32px;
+.section-dark .section-kicker{
+    color:var(--gold2);
 }
 
-.line{
-  width:65px;
-  height:3px;
-  background:var(--gold);
-  margin-top:13px;
+.section-title{
+    font-size:35px;
+    line-height:1.35;
+    color:var(--navy);
+    margin:6px 0 10px;
 }
 
-.section-head p{
-  max-width:800px;
-  color:var(--muted);
+.section-dark .section-title{
+    color:white;
 }
 
-/* ==============================
+.section-line{
+    width:58px;
+    height:3px;
+    background:var(--gold);
+    margin:15px 0 20px;
+}
+
+.section-description{
+    color:var(--muted);
+    max-width:800px;
+    font-size:16px;
+}
+
+.section-dark .section-description{
+    color:#cad4da;
+}
+
+
+/* =========================================================
    ABOUT
-============================== */
+========================================================= */
 
 .about-grid{
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:35px;
+    display:grid;
+    grid-template-columns:1.25fr .75fr;
+    gap:50px;
+    align-items:start;
 }
 
-.about-box{
-  background:white;
-  padding:35px;
-  border:1px solid var(--line);
-}
-
-.about-box h3{
-  color:var(--dark);
-  margin-top:0;
+.about-copy{
+    font-size:16px;
+    color:#4f5a62;
 }
 
 .quote-box{
-  background:var(--dark);
-  color:white;
-  padding:35px;
-  border-right:5px solid var(--gold);
+    background:var(--navy);
+    color:white;
+    padding:36px;
+    border-radius:7px;
+    position:relative;
 }
 
-.quote-box strong{
-  display:block;
-  color:var(--gold2);
-  margin-bottom:10px;
+.quote-box:before{
+    content:"“";
+    color:var(--gold);
+    font-size:90px;
+    line-height:1;
+    position:absolute;
+    top:8px;
+    left:20px;
+    opacity:.35;
 }
 
-/* ==============================
-   FIELDS
-============================== */
+.quote-box h3{
+    color:var(--gold2);
+    margin-top:0;
+    font-size:22px;
+}
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+.quote-box p{
+    color:#d8e0e4;
+}
+
+
+/* =========================================================
+   STUDY AREAS
+========================================================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
 }
 
 .card{
-  background:white;
-  padding:30px;
-  border-top:4px solid var(--gold);
-  box-shadow:0 4px 15px rgba(0,0,0,.04);
-  transition:.2s;
+    background:white;
+    border:1px solid #ece9e2;
+    border-radius:7px;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.card:before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:100%;
+    height:4px;
+    background:var(--gold);
 }
 
 .card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transform:translateY(-5px);
+    box-shadow:0 16px 35px rgba(7,28,44,.09);
 }
 
-.card .num{
-  color:var(--gold);
-  font-size:13px;
-  font-weight:bold;
+.card-number{
+    font-size:12px;
+    color:#a88a4b;
+    font-weight:800;
 }
 
 .card h3{
-  color:var(--dark);
-  margin:7px 0 10px;
+    color:var(--navy);
+    margin:7px 0 10px;
+    font-size:20px;
 }
 
 .card p{
-  color:var(--muted);
-  font-size:14px;
-  margin:0;
+    color:var(--muted);
+    margin:0;
+    font-size:14px;
 }
 
-/* ==============================
+
+/* =========================================================
    METHODOLOGY
-============================== */
-
-.method{
-  background:var(--dark);
-  padding:50px;
-  color:white;
-}
-
-.method .section-head h2{
-  color:white;
-}
-
-.method .section-kicker{
-  color:var(--gold2);
-}
+========================================================= */
 
 .method-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:1px;
-  background:rgba(255,255,255,.12);
-  margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-.step{
-  background:var(--dark2);
-  padding:25px 20px;
+.method{
+    border:1px solid rgba(255,255,255,.13);
+    padding:27px;
+    border-radius:6px;
+    background:rgba(255,255,255,.035);
 }
 
-.step span{
-  color:var(--gold2);
-  font-weight:bold;
-  font-size:12px;
+.method .num{
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--gold);
+    color:var(--gold2);
+    border-radius:50%;
+    font-weight:800;
+    margin-bottom:16px;
 }
 
-.step h3{
-  font-size:16px;
-  margin:8px 0;
+.method h3{
+    margin:0 0 8px;
+    color:white;
 }
 
-.step p{
-  color:#ccc;
-  font-size:13px;
-  margin:0;
+.method p{
+    color:#bdc9cf;
+    font-size:14px;
+    margin:0;
 }
 
-/* ==============================
-   STUDIES
-============================== */
+
+/* =========================================================
+   STUDIES LIBRARY
+========================================================= */
+
+.library-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    max-width:390px;
+    border:1px solid #dcd8cf;
+    background:white;
+    border-radius:5px;
+    padding:13px 15px;
+    font-family:inherit;
+    outline:none;
+}
+
+.search:focus{
+    border-color:var(--gold);
+}
 
 .study-list{
-  display:grid;
-  gap:15px;
+    display:grid;
+    gap:15px;
 }
 
-.study{
-  background:white;
-  padding:25px 30px;
-  border-right:5px solid var(--gold);
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:center;
-  gap:25px;
+.study-item{
+    background:white;
+    border:1px solid #e9e6df;
+    border-radius:6px;
+    padding:24px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:25px;
+    align-items:center;
+    transition:.2s;
 }
 
-.study h3{
-  color:var(--dark);
-  margin:4px 0;
+.study-item:hover{
+    border-color:#d0b774;
+    box-shadow:0 8px 24px rgba(7,28,44,.06);
 }
 
-.study p{
-  color:var(--muted);
-  margin:0;
-  font-size:14px;
+.study-tag{
+    display:inline-block;
+    background:#f1ead9;
+    color:#80662e;
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:7px;
 }
 
-.tag{
-  display:inline-block;
-  background:#eee7d8;
-  color:#725d31;
-  padding:3px 11px;
-  border-radius:20px;
-  font-size:12px;
+.study-item h3{
+    color:var(--navy);
+    margin:0 0 5px;
+    font-size:19px;
 }
 
-.study-action{
-  color:var(--gold);
-  font-weight:bold;
-  font-size:14px;
+.study-item p{
+    color:var(--muted);
+    font-size:13px;
+    margin:0;
 }
 
-/* ==============================
-   SAFWAH GROUP
-============================== */
-
-.group{
-  background:white;
-  border:1px solid var(--line);
+.study-status{
+    color:#9a7936;
+    font-size:12px;
+    white-space:nowrap;
 }
 
-.group-intro{
-  padding:45px;
-}
 
-.group-services{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  border-top:1px solid var(--line);
+/* =========================================================
+   GROUP SERVICES
+========================================================= */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
 }
 
 .service{
-  padding:25px 18px;
-  border-left:1px solid var(--line);
-  text-align:center;
-}
-
-.service:last-child{
-  border-left:0;
+    background:white;
+    padding:24px 18px;
+    border-radius:6px;
+    text-align:center;
+    border-bottom:3px solid var(--gold);
+    min-height:125px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 .service strong{
-  display:block;
-  color:var(--dark);
+    color:var(--navy);
+    font-size:15px;
 }
 
-/* ==============================
+.service span{
+    color:var(--muted);
+    font-size:11px;
+    direction:ltr;
+}
+
+
+/* =========================================================
+   VISION / MISSION
+========================================================= */
+
+.vm-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.vm{
+    padding:35px;
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:6px;
+}
+
+.vm h3{
+    color:var(--gold2);
+    margin-top:0;
+}
+
+.vm p{
+    color:#d0dade;
+    margin-bottom:0;
+}
+
+
+/* =========================================================
    VALUES
-============================== */
+========================================================= */
 
 .values{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    margin-top:35px;
 }
 
 .value{
-  background:#ece5d6;
-  color:#665329;
-  padding:10px 18px;
-  border-radius:25px;
-  font-size:13px;
-}
-
-/* ==============================
-   NOTICE
-============================== */
-
-.notice{
-  background:#eee9df;
-  padding:25px 30px;
-  border-right:4px solid var(--gold);
-  color:#555;
-  font-size:13px;
-}
-
-/* ==============================
-   FOOTER
-============================== */
-
-footer{
-  background:#101814;
-  color:#ccc;
-  padding:60px 25px 25px;
-}
-
-.footer-grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1.2fr;
-  gap:40px;
-}
-
-.footer-title{
-  color:white;
-  font-size:21px;
-  font-weight:bold;
-}
-
-.footer-title-en{
-  color:var(--gold2);
-  direction:ltr;
-  text-align:right;
-  letter-spacing:2px;
-  font-size:14px;
-}
-
-footer h3{
-  color:var(--gold2);
-  font-size:15px;
-  margin-top:0;
-}
-
-footer p,
-footer li{
-  color:#aaa;
-  font-size:13px;
-}
-
-footer ul{
-  list-style:none;
-  padding:0;
-}
-
-footer a{
-  color:#ddd;
-  text-decoration:none;
-}
-
-footer a:hover{
-  color:var(--gold2);
-}
-
-.footer-bottom{
-  max-width:1200px;
-  margin:40px auto 0;
-  padding-top:20px;
-  border-top:1px solid rgba(255,255,255,.1);
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  color:#777;
-  font-size:12px;
-}
-
-/* ==============================
-   RESPONSIVE
-============================== */
-
-@media(max-width:900px){
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .metrics-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .method-grid{
-    grid-template-columns:1fr;
-  }
-
-  .group-services{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .footer-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .about-grid{
-    grid-template-columns:1fr;
-  }
-
-}
-
-@media(max-width:600px){
-
-  .topbar-inner{
-    display:block;
+    border-top:2px solid var(--gold);
+    padding:18px 10px;
+    background:rgba(255,255,255,.04);
     text-align:center;
-  }
-
-  .nav-inner{
-    display:block;
-    text-align:center;
-  }
-
-  .nav-links{
-    justify-content:center;
-    margin-top:12px;
-  }
-
-  .hero{
-    padding:65px 20px;
-  }
-
-  .hero h1{
-    font-size:34px;
-  }
-
-  .hero-en{
-    font-size:21px;
-    text-align:center;
-  }
-
-  .hero-inner{
-    text-align:center;
-  }
-
-  .hero-buttons{
-    justify-content:center;
-  }
-
-  .metrics-grid,
-  .grid,
-  .group-services,
-  .footer-grid{
-    grid-template-columns:1fr;
-  }
-
-  .metric,
-  .service{
-    border-left:0;
-    border-bottom:1px solid var(--line);
-  }
-
-  .study{
-    grid-template-columns:1fr;
-  }
-
-  .method{
-    padding:35px 22px;
-  }
-
-  .footer-bottom{
-    display:block;
-    text-align:center;
-  }
-
+    font-size:13px;
+    color:#e0e7ea;
 }
 
-</style>
-</head>
 
-<body>
+/* =========================================================
+   CTA
+========================================================= */
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <div>المملكة العربية السعودية · المدينة المنورة</div>
-    <div>
-      مركز الدراسات والتحليل الاستثماري
-    </div>
-  </div>
-</div>
+.cta{
+    background:
+        linear-gradient(135deg,#c4a158,#e1ca88);
+    color:var(--navy);
+    padding:55px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
 
-<nav>
-  <div class="nav-inner">
+.cta h2{
+    margin:0 0 5px;
+    font-size:29px;
+}
 
-    <div class="brand">
-      صفوة الاستثمارية
-      <span>SAFWAH INVESTMENT</span>
-    </div>
+.cta p{
+    margin:0;
+}
 
-    <div class="nav-links">
-      <a href="#about">عن المركز</a>
-      <a href="#fields">مجالات الدراسات</a>
-      <a href="#method">المنهجية</a>
-      <a href="#studies">الدراسات</a>
-      <a href="#group">عن صفوة</a>
-    </div>
-
-  </div>
-</nav>
-
-<header class="hero">
-
-  <div class="hero-inner">
-
-    <div class="eyebrow">
-      مجموعة صفوة الاستثمارية
-    </div>
-
-    <h1>صفوة الاستثمارية</h1>
-
-    <div class="hero-en">
-      SAFWAH INVESTMENT
-    </div>
-
-    <h2>
-      مركز الدراسات والتحليل الاستثماري
-    </h2>
-
-    <p>
-      منصة متخصصة لدراسة الفرص والمشروعات،
-      وإجراء دراسات ما قبل الجدوى والعناية الواجبة
-      والتحليل الاستثماري والصناعي والعقاري،
-      بما يدعم اتخاذ القرار على أسس تحليلية قابلة للقياس والتحقق.
-    </p>
-
-    <div class="hero-buttons">
-
-      <a class="btn btn-gold" href="#studies">
-        استعرض الدراسات
-      </a>
-
-      <a class="btn btn-outline"
-         href="https://safwah-group.com/"
-         target="_blank">
-        الموقع الرسمي للمجموعة
-      </a>
-
-    </div>
-
-  </div>
-
-</header>
-
-<div class="metrics">
-
-  <div class="metrics-grid">
-
-    <div class="metric">
-      <strong>2016</strong>
-      <span>تأسيس مجموعة صفوة الاستثمارية</span>
-    </div>
-
-    <div class="metric">
-      <strong>6</strong>
-      <span>مسارات رئيسية للدراسات</span>
-    </div>
-
-    <div class="metric">
-      <strong>5</strong>
-      <span>مراحل منهجية للتحليل</span>
-    </div>
-
-    <div class="metric">
-      <strong>KSA</strong>
-      <span>السوق السعودي محور أعمال المجموعة</span>
-    </div>
-
-  </div>
-
-</div>
-
-<main>
-
-<section id="about">
-
-  <div class="section-head">
-    <div class="section-kicker">SAFWAH INVESTMENT</div>
-    <h2>مركز الدراسات والتحليل الاستثماري</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="about-grid">
-
-    <div class="
+.cta .btn{
+    background
