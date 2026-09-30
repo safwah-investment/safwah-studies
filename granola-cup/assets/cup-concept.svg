@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-label="Granola Cup packaging concept">
+<defs>
+  <linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f5efe2"/><stop offset="1" stop-color="#e8dcc5"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity=".16"/></filter>
+</defs>
+<rect width="1440" height="760" rx="36" fill="url(#bg)"/>
+<text x="72" y="92" font-family="Arial,sans-serif" font-size="28" fill="#173b2b" font-weight="700">GRANOLA CUP — PACKAGING CONCEPT</text>
+<text x="72" y="132" font-family="Arial,sans-serif" font-size="20" fill="#6b705c">60 g single-serve · add 120–150 ml hot or cold milk</text>
+<g transform="translate(95 185)" filter="url(#shadow)">
+  <ellipse cx="190" cy="470" rx="152" ry="30" fill="#000" opacity=".08"/>
+  <path d="M70 70h240l-26 380c-4 56-39 86-94 86s-90-30-94-86z" fill="#fffaf0"/>
+  <ellipse cx="190" cy="70" rx="121" ry="34" fill="#24543d"/>
+  <ellipse cx="190" cy="82" rx="103" ry="24" fill="#d69a43"/>
+  <circle cx="152" cy="80" r="10" fill="#6a421a"/><circle cx="190" cy="76" r="9" fill="#a6672b"/><circle cx="226" cy="83" r="8" fill="#5d3518"/>
+  <rect x="100" y="188" width="180" height="5" rx="3" fill="#bc7c2f"/>
+  <text x="190" y="245" text-anchor="middle" font-family="Arial,sans-serif" font-size="33" font-weight="800" fill="#173b2b">GRANOLA</text>
+  <text x="190" y="282" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#8b5e2c">DATE &amp; CINNAMON</text>
+  <text x="190" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#173b2b">HOT • COLD</text>
+  <text x="190" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#6b705c">ADD MILK TO LINE</text>
+  <text x="190" y="420" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#6b705c">60 g</text>
+</g>
+<g transform="translate(505 185)" filter="url(#shadow)">
+  <ellipse cx="190" cy="470" rx="152" ry="30" fill="#000" opacity=".08"/>
+  <path d="M70 70h240l-26 380c-4 56-39 86-94 86s-90-30-94-86z" fill="#fffaf0"/>
+  <ellipse cx="190" cy="70" rx="121" ry="34" fill="#d69a43"/>
+  <ellipse cx="190" cy="82" rx="103" ry="24" fill="#f0c55f"/>
+  <circle cx="152" cy="80" r="10" fill="#9b6a2d"/><circle cx="190" cy="76" r="9" fill="#c58d36"/><circle cx="226" cy="83" r="8" fill="#8c5d26"/>
+  <rect x="100" y="188" width="180" height="5" rx="3" fill="#d69a43"/>
+  <text x="190" y="245" text-anchor="middle" font-family="Arial,sans-serif" font-size="33" font-weight="800" fill="#173b2b">GRANOLA</text>
+  <text x="190" y="282" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#9c6b22">HONEY CRUNCH</text>
+  <text x="190" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#173b2b">HOT • COLD</text>
+  <text x="190" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#6b705c">ADD MILK TO LINE</text>
+  <text x="190" y="420" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#6b705c">60 g</text>
+</g>
+<g transform="translate(915 185)" filter="url(#shadow)">
+  <ellipse cx="190" cy="470" rx="152" ry="30" fill="#000" opacity=".08"/>
+  <path d="M70 70h240l-26 380c-4 56-39 86-94 86s-90-30-94-86z" fill="#fffaf0"/>
+  <ellipse cx="190" cy="70" rx="121" ry="34" fill="#3f2a21"/>
+  <ellipse cx="190" cy="82" rx="103" ry="24" fill="#6d4938"/>
+  <circle cx="152" cy="80" r="10" fill="#2f1c16"/><circle cx="190" cy="76" r="9" fill="#7b4d31"/><circle cx="226" cy="83" r="8" fill="#4b2d22"/>
+  <rect x="100" y="188" width="180" height="5" rx="3" fill="#5e3a2b"/>
+  <text x="190" y="245" text-anchor="middle" font-family="Arial,sans-serif" font-size="33" font-weight="800" fill="#173b2b">GRANOLA</text>
+  <text x="190" y="282" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" fill="#5e3a2b">COCOA CRUNCH</text>
+  <text x="190" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#173b2b">HOT • COLD</text>
+  <text x="190" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#6b705c">ADD MILK TO LINE</text>
+  <text x="190" y="420" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#6b705c">60 g</text>
+</g>
+<text x="720" y="716" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#6b705c">Concept visual — final pack subject to food-contact, shelf-life and labeling validation.</text>
+</svg>
