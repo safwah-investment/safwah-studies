@@ -28,3 +28,28 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}.topbar{po
 footer{padding:36px 6vw;background:#10291f;color:white;display:flex;justify-content:space-between;gap:30px}footer b,footer span{display:block}footer span,footer p{color:#aabcb1;font-size:13px;margin:0}
 @media(max-width:980px){.topbar nav{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding-top:56px}.cards.four,.cards.three,.flavours,.market-grid,.scenario-grid,.timeline{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.unit-grid{grid-template-columns:1fr 1fr}.chain{grid-template-columns:1fr}.chain i{display:none}.kpi-grid,.test-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:52px}}
 @media(max-width:640px){.section{padding:62px 5vw}.hero{padding:48px 5vw}.hero h1{font-size:39px}.lead{font-size:16px}.hero-metrics{grid-template-columns:1fr 1fr 1fr}.strip{grid-template-columns:1fr 1fr;gap:8px}.strip div{border:none;padding:8px}.cards.four,.cards.three,.flavours,.market-grid,.scenario-grid,.timeline,.unit-grid,.kpi-grid,.test-grid{grid-template-columns:1fr}.specs{grid-template-columns:1fr}.risk-row{grid-template-columns:1fr}.risk-row.head{display:none}.break-even{grid-template-columns:1fr}.decision-box{padding:30px 22px}.capital-card b{font-size:40px}.scenario.featured{transform:none}.row{grid-template-columns:1fr 90px}footer{flex-direction:column}.topbar{padding-inline:16px}.brand small{display:none}}
+
+/* SAFWAH INVESTMENT — unified study identity */
+@font-face{font-family:CairoSafwah;src:url('../assets/cairo.ttf') format('truetype');font-weight:100 900;font-display:swap}
+@font-face{font-family:SafwahDisplay;src:url('../assets/sffourchebold.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{--ink:#043418;--ink2:#043418;--cream:#fffdf6;--sand:#f2f1e9;--gold:#cba42c;--gold2:#cba42c;--brown:#4b3c1c;--muted:#59695e;--line:#dedfd5;--white:#fff}
+body{font-family:CairoSafwah,Arial,sans-serif;background:#fffdf6;color:#5e5d5c}
+body.en{font-family:CairoSafwah,Arial,sans-serif}
+.topbar{background:#043418;color:#fff;border-bottom:1px solid #ffffff25;padding:14px 4vw}
+.topbar nav a{color:#fff}.topbar nav a:hover{color:#cba42c}.lang{border-color:#ffffff66;color:#fff}
+.safwah-brand{gap:14px}.safwah-brand img{width:148px;height:50px;object-fit:contain}.safwah-brand b{font-family:SafwahDisplay,CairoSafwah,sans-serif;color:#fff;font-size:17px;letter-spacing:.03em}.safwah-brand small{color:#d7d6ce}
+.hero{background:radial-gradient(circle at 76% 26%,#f0e5bd 0,transparent 33%),linear-gradient(135deg,#fffdf6 0,#f2f1e9 100%)}
+.hero h1,.section-head h2,.split h2,.subhead{color:#043418}
+body.en .hero h1{font-family:SafwahDisplay,CairoSafwah,sans-serif}
+.eyebrow,.kicker{color:#4b3c1c}
+.btn.primary,.strip,.section.dark,.scenario.featured,.row.head,.capital-card,.decision-box{background:#043418}
+.btn.secondary{border-color:#043418;color:#043418}
+.strip span,.market-grid span,.timeline article>span,.scenario strong,.capital-card b,.gates i{color:#cba42c}
+.section.muted,.regulatory{background:#f2f1e9}.investment{background:#fffaeb}
+.cards article,.unit-card,.chain div,.kpi-grid div,.test-grid article{border-radius:0}
+.cards article{border-top:2px solid #cba42c}.flavour{border-radius:0}.date{background:#043418}.honey{background:#cba42c}.cocoa{background:#4b3c1c}
+.hero-visual img,.diagram,.visual-wide img{border-radius:0}
+.break-even{background:#fffaeb;border-radius:0;border-top:3px solid #cba42c}
+.risk-table{border-radius:0}.decision-box{border-radius:0;border-top:5px solid #cba42c}
+.safwah-footer{background:#043418;border-top:4px solid #cba42c;align-items:center}.footer-brand{display:flex;align-items:center;gap:16px}.footer-brand img{width:150px;height:54px;object-fit:contain}.safwah-footer b{font-family:SafwahDisplay,CairoSafwah,sans-serif;letter-spacing:.03em;color:#fff}.safwah-footer span,.safwah-footer p{color:#d7d6ce}
+@media(max-width:640px){.safwah-brand img{width:120px}.safwah-brand span{display:none}.footer-brand img{width:120px}.safwah-footer{align-items:flex-start}}
