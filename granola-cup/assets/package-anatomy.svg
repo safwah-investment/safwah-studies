@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-label="Granola cup package anatomy">
+<rect width="1200" height="760" rx="36" fill="#fbf8f1"/>
+<text x="64" y="76" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#173b2b">PACKAGE ANATOMY · تشريح العبوة المقترحة</text>
+<g transform="translate(380 120)">
+  <ellipse cx="220" cy="70" rx="170" ry="50" fill="#24543d"/>
+  <ellipse cx="220" cy="78" rx="145" ry="34" fill="#d69a43"/>
+  <path d="M50 70h340l-34 500c-4 65-55 98-136 98S88 635 84 570z" fill="#fff" stroke="#d9d2c4" stroke-width="4"/>
+  <line x1="110" y1="255" x2="330" y2="255" stroke="#d69a43" stroke-width="5" stroke-dasharray="10 10"/>
+  <text x="220" y="245" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#9a6829">MILK FILL LINE</text>
+  <text x="220" y="350" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" fill="#173b2b">GRANOLA</text>
+  <text x="220" y="390" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" fill="#6b705c">60 g · 12 oz CUP</text>
+  <text x="220" y="435" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#173b2b">HOT / COLD MILK</text>
+</g>
+<g font-family="Arial,sans-serif" fill="#173b2b" font-size="20">
+  <circle cx="178" cy="190" r="8" fill="#d69a43"/><path d="M188 190H410" stroke="#d69a43" stroke-width="3"/><text x="72" y="182">Peel-off seal</text><text x="72" y="210" font-size="17" fill="#6b705c">ختم محكم للرطوبة</text>
+  <circle cx="1030" cy="372" r="8" fill="#d69a43"/><path d="M790 372h230" stroke="#d69a43" stroke-width="3"/><text x="1036" y="363">Fill line</text><text x="1036" y="391" font-size="17" fill="#6b705c">120–150 ml</text>
+  <circle cx="175" cy="500" r="8" fill="#d69a43"/><path d="M185 500h280" stroke="#d69a43" stroke-width="3"/><text x="72" y="490">Food-contact cup</text><text x="72" y="518" font-size="17" fill="#6b705c">مناسب للحار والبارد</text>
+  <circle cx="1025" cy="570" r="8" fill="#d69a43"/><path d="M750 570h265" stroke="#d69a43" stroke-width="3"/><text x="1034" y="562">Bilingual label</text><text x="1034" y="590" font-size="17" fill="#6b705c">Arabic + English</text>
+</g>
+<text x="600" y="718" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#6b705c">Final material specification requires food-contact and hot-fill validation.</text>
+</svg>
