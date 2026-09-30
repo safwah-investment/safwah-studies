@@ -1,0 +1,19 @@
+{
+  "currency":"SAR",
+  "portion_g":60,
+  "cup_oz":12,
+  "milk_ml":{"min":120,"max":150},
+  "unit_cost_assumption":2.80,
+  "sell_in_price":4.75,
+  "unit_contribution":1.95,
+  "gross_margin_pct":41.05,
+  "consumer_price_vat_inclusive":16.00,
+  "cafe_incremental_cost":1.15,
+  "break_even":{"monthly_fixed_cost":25000,"cups_per_month":12820,"cafes_at_7_per_day":61},
+  "scenarios":[
+    {"name":"conservative","cafes":40,"cups_per_cafe_day":4,"cups_month":4800,"monthly_operating_result":-8640},
+    {"name":"base","cafes":80,"cups_per_cafe_day":7,"cups_month":16800,"monthly_operating_result":7760},
+    {"name":"growth","cafes":150,"cups_per_cafe_day":10,"cups_month":45000,"monthly_operating_result":42750}
+  ],
+  "note":"Pre-feasibility assumptions only; replace with supplier quotes and pilot data."
+}
