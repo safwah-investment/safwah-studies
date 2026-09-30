@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 620" role="img" aria-label="Cafe service flow">
+<rect width="1440" height="620" rx="36" fill="#173b2b"/>
+<text x="72" y="82" font-family="Arial,sans-serif" font-size="28" fill="#fff8e8" font-weight="700">CAFÉ SERVICE FLOW · أقل من 30 ثانية مستهدف</text>
+<g font-family="Arial,sans-serif">
+<g transform="translate(80 145)">
+  <circle cx="130" cy="130" r="112" fill="#f2c66d"/><path d="M84 92h92l-10 138c-2 20-15 31-36 31s-34-11-36-31z" fill="#fffaf0"/><ellipse cx="130" cy="92" rx="47" ry="14" fill="#24543d"/>
+  <text x="130" y="304" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">1 · OPEN</text><text x="130" y="338" text-anchor="middle" font-size="19" fill="#dbe8df">افتح الكوب</text>
+</g>
+<path d="M335 275h115" stroke="#dbe8df" stroke-width="8" stroke-linecap="round"/><path d="M435 255l24 20-24 20" fill="none" stroke="#dbe8df" stroke-width="8"/>
+<g transform="translate(460 145)">
+  <circle cx="130" cy="130" r="112" fill="#e9efe9"/><path d="M99 79h62l-8 141c-1 22-13 34-23 34s-22-12-23-34z" fill="#fff"/><path d="M75 73q56-38 110 0" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/><path d="M75 74q65 42 54 98" fill="none" stroke="#9ec8e2" stroke-width="12" stroke-linecap="round"/>
+  <text x="130" y="304" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">2 · ADD MILK</text><text x="130" y="338" text-anchor="middle" font-size="19" fill="#dbe8df">بارد أو ساخن</text>
+</g>
+<path d="M715 275h115" stroke="#dbe8df" stroke-width="8" stroke-linecap="round"/><path d="M815 255l24 20-24 20" fill="none" stroke="#dbe8df" stroke-width="8"/>
+<g transform="translate(840 145)">
+  <circle cx="130" cy="130" r="112" fill="#d69a43"/><path d="M92 92h76l-9 132c-2 24-15 35-29 35s-27-11-29-35z" fill="#fffaf0"/><path d="M175 60l-60 168" stroke="#6b4a2e" stroke-width="9" stroke-linecap="round"/>
+  <text x="130" y="304" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">3 · STIR</text><text x="130" y="338" text-anchor="middle" font-size="19" fill="#fff8e8">حرّك مرة واحدة</text>
+</g>
+<path d="M1095 275h115" stroke="#dbe8df" stroke-width="8" stroke-linecap="round"/><path d="M1195 255l24 20-24 20" fill="none" stroke="#dbe8df" stroke-width="8"/>
+<g transform="translate(1185 145)">
+  <circle cx="130" cy="130" r="112" fill="#7aa17f"/><path d="M95 90h70l-7 130c-2 24-15 36-28 36s-26-12-28-36z" fill="#fffaf0"/><path d="M185 123c36 30 32 76-12 92" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  <text x="130" y="304" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">4 · SERVE</text><text x="130" y="338" text-anchor="middle" font-size="19" fill="#dbe8df">قدّم مباشرة</text>
+</g>
+</g>
+<text x="720" y="560" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#dbe8df">No kitchen prep · No refrigerated product inventory · Controlled portion · Low handling</text>
+</svg>
