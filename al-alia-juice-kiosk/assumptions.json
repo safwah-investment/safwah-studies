@@ -1,0 +1,296 @@
+{
+  "source": "Referenced ChatGPT study v1.0",
+  "version": "1.1",
+  "area": 16,
+  "rentPerSqmAnnualAssumed": 1500,
+  "annualRent": 24000,
+  "capex": [
+    [
+      [
+        "تصنيع وتجهيز الكشك",
+        "Kiosk fabrication & fit-out"
+      ],
+      "48,000"
+    ],
+    [
+      [
+        "الأجهزة الرئيسية",
+        "Main equipment"
+      ],
+      "30,000"
+    ],
+    [
+      [
+        "توصيلات المياه والكهرباء والصرف",
+        "Utilities & connections"
+      ],
+      "7,000"
+    ],
+    [
+      [
+        "نقاط البيع والشاشات والهوية",
+        "POS, screens & brand"
+      ],
+      "8,000"
+    ],
+    [
+      [
+        "التراخيص والتجهيز الافتتاحي",
+        "Licensing & pre-opening"
+      ],
+      "5,000"
+    ],
+    [
+      [
+        "المخزون الأول",
+        "Opening inventory"
+      ],
+      "6,000"
+    ],
+    [
+      [
+        "احتياطي وتكاليف غير متوقعة",
+        "Contingency"
+      ],
+      "16,000"
+    ],
+    [
+      [
+        "إجمالي الاستثمار المقدر",
+        "Estimated total investment"
+      ],
+      "120,000"
+    ]
+  ],
+  "fixedOpexModel": 288000,
+  "fixedOpexListedSum": 288000,
+  "ticketInclVat": 24,
+  "vat": 0.15,
+  "tradingDays": 365,
+  "variableCostRatio": 0.31,
+  "baseOrders": 80,
+  "breakEvenOriginal": 55,
+  "goGateOriginal": 60,
+  "originalPaybackMonths": [
+    10,
+    12
+  ],
+  "equipment": [
+    [
+      [
+        "خلاط تجاري بغطاء عازل للصوت",
+        "Soundproof commercial blender"
+      ],
+      "2",
+      "2,500–3,500"
+    ],
+    [
+      [
+        "عصارة برتقال أوتوماتيكية",
+        "Automatic orange juicer"
+      ],
+      "1",
+      "4,500–5,500"
+    ],
+    [
+      [
+        "عصارة ضغط بارد تجارية",
+        "Commercial cold press juicer"
+      ],
+      "1",
+      "800–1,500"
+    ],
+    [
+      [
+        "فريزر تحت الكاونتر",
+        "Undercounter freezer"
+      ],
+      "1",
+      "5,000–6,000"
+    ],
+    [
+      [
+        "ثلاجة عرض / رأسية",
+        "Display / upright refrigerator"
+      ],
+      "1",
+      "2,000–3,000"
+    ],
+    [
+      [
+        "صانعة ثلج 30–36 كجم/يوم",
+        "Ice maker 30–36 kg/day"
+      ],
+      "1",
+      "2,300–3,500"
+    ],
+    [
+      [
+        "ماكينة تغليف أكواب",
+        "Cup sealing machine"
+      ],
+      "1",
+      "1,600–2,700"
+    ],
+    [
+      [
+        "فلتر مياه ونظام أحواض",
+        "Water filter & sink system"
+      ],
+      "1",
+      "3,500–5,000"
+    ],
+    [
+      [
+        "ميزان أغذية رقمي",
+        "Digital food scale"
+      ],
+      "1",
+      "≈500"
+    ],
+    [
+      [
+        "نظام نقاط بيع",
+        "POS system"
+      ],
+      "1",
+      "2,500–4,000"
+    ],
+    [
+      [
+        "أدوات وحاويات",
+        "Smallwares & containers"
+      ],
+      "—",
+      "3,000–4,000"
+    ]
+  ],
+  "opex": [
+    [
+      [
+        "الإيجار",
+        "Rent"
+      ],
+      "24,000"
+    ],
+    [
+      [
+        "رسوم المول والخدمات — افتراض",
+        "Mall service charges — provisional"
+      ],
+      "18,000"
+    ],
+    [
+      [
+        "العمالة",
+        "Labour"
+      ],
+      "168,000"
+    ],
+    [
+      [
+        "الكهرباء والمياه",
+        "Electricity & water"
+      ],
+      "24,000"
+    ],
+    [
+      [
+        "التسويق",
+        "Marketing"
+      ],
+      "18,000"
+    ],
+    [
+      [
+        "الصيانة",
+        "Maintenance"
+      ],
+      "8,000"
+    ],
+    [
+      [
+        "نقاط البيع والإنترنت والإدارة",
+        "POS, internet & administration"
+      ],
+      "10,000"
+    ],
+    [
+      [
+        "التراخيص والتأمين ومصروفات أخرى",
+        "Licences, insurance & miscellaneous"
+      ],
+      "8,000"
+    ],
+    [
+      [
+        "احتياطي التشغيل",
+        "Operating contingency"
+      ],
+      "10,000"
+    ],
+    [
+      [
+        "التكلفة الثابتة المعتمدة في الدراسة الأصلية",
+        "Fixed cost used in the original model"
+      ],
+      "≈288,000"
+    ]
+  ],
+  "scenarios": [
+    [
+      [
+        "الطلبات يوميًا",
+        "Orders/day"
+      ],
+      "55",
+      "80",
+      "110"
+    ],
+    [
+      [
+        "تحصيلات العملاء شاملة الضريبة",
+        "Customer collections incl. VAT"
+      ],
+      "481,800",
+      "700,800",
+      "963,600"
+    ],
+    [
+      [
+        "صافي الإيرادات دون الضريبة",
+        "Net revenue excl. VAT"
+      ],
+      "419,000",
+      "609,000",
+      "838,000"
+    ],
+    [
+      [
+        "هامش المساهمة بعد تكلفة متغيرة 31%",
+        "Contribution after 31% variable cost"
+      ],
+      "289,000",
+      "420,000",
+      "578,000"
+    ],
+    [
+      [
+        "المصروفات الثابتة",
+        "Fixed OPEX"
+      ],
+      "288,000",
+      "288,000",
+      "288,000"
+    ],
+    [
+      [
+        "الربح قبل الفوائد والضرائب والإهلاك EBITDA",
+        "EBITDA"
+      ],
+      "≈1,000",
+      "≈132,000",
+      "≈290,000"
+    ]
+  ]
+}

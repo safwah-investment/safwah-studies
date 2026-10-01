@@ -1,0 +1,5 @@
+Tool: built-in image_gen (not CLI).
+Initial prompt: Photorealistic 4m x 4m compact premium juice and smoothie mall kiosk. SAFWAH INVESTMENT fascia. Deep forest green #043418, brushed gold #cba42c, white quartz, two-sided opening, blender acoustic covers, concealed cold storage, realistic Saudi mall environment, no people.
+Final edit: Preserve layout and camera. Replace leaf emblems with abstract gold dome outlines inspired by the Green Dome of the Prophet's Mosque in Madinah. Add shallow architectural arches behind counter. Preserve practical flat canopy; do not add a roof dome. Retain only SAFWAH INVESTMENT and JUICE & SMOOTHIES; remove invented prices/slogans. Menu screen beverage photos only. No claim of mosque affiliation.
+Generated source: exec-790bc689-97e2-4f8b-b0ce-c8231ddcbf3c.png
+Published asset: assets/kiosk-concept.jpg
