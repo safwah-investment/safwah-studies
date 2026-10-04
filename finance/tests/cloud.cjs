@@ -1,15 +1,15 @@
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
 let calls=[],reply=[];
-const context={records:[],cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},fetch:async(url,options)=>{calls.push({url,options});const x=reply.shift();if(!x)throw Error('Unexpected request');return {ok:x.ok!==false,status:x.status||200,json:async()=>x.body}},Date,Map,Boolean,Error,URLSearchParams,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
+const context={records:[],localStorage:{getItem(){return null},setItem(){},removeItem(){}},cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},fetch:async(url,options)=>{calls.push({url,options});const x=reply.shift();if(!x)throw Error('Unexpected request');return {ok:x.ok!==false,status:x.status||200,json:async()=>x.body}},Date,Map,Boolean,Error,URLSearchParams,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
 vm.createContext(context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../cloud.js'),'utf8'),context);
 vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publishableKey='public-key';cloudSession={access_token:'user-token',expires_at:Date.now()/1000+3600,user:{id:'user-id',email:'editor@example.com'}}",context);
 (async()=>{
- reply=[{body:[]},{body:[]}];
- await assert.rejects(vm.runInContext('cloudState()',context),/اعتماد مالك المشروع/);
- assert.equal(calls.length,2);assert.ok(calls.every(call=>!call.url.includes('finance_records')));
- calls=[];reply=[{body:[{access_role:'editor'}]},{body:[{id:'a',revision:2,data:{description:'صفوة',amount:100}}]}];
+ vm.runInContext('cloudSession=null',context);
+ await assert.rejects(vm.runInContext('cloudState()',context),/أنشئ مساحتك/);assert.equal(calls.length,0);
+ vm.runInContext("cloudSession={access_token:'user-token',expires_at:Date.now()/1000+3600,user:{id:'user-id'}}",context);
+ calls=[];reply=[{body:[{id:'a',revision:2,data:{description:'صفوة',amount:100}}]}];
  const state=await vm.runInContext('cloudState()',context);
- assert.equal(state.records[0].description,'صفوة');assert.equal(calls[1].options.headers.Authorization,'Bearer user-token');
+ assert.equal(state.records[0].description,'صفوة');assert.equal(calls[0].options.headers.Authorization,'Bearer user-token');assert.ok(calls[0].url.includes('owner_id=eq.user-id'));
  reply=[{ok:false,status:400,body:{message:'STALE_RECORD'}}];
  await assert.rejects(vm.runInContext("cloudSave({id:'a'},2)",context),/جهاز آخر/);
  reply=[{body:3}];await vm.runInContext("cloudSave({id:'a'},2)",context);
@@ -28,11 +28,11 @@ vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publi
  const final=JSON.parse(calls[2].options.body).record_data;
  assert.equal(final.description,'البيان المعدل');assert.equal(final.amount,12050);assert.equal(final.reviewed,true);assert.equal(final.account,'إنترنت وهاتف');assert.equal(final.notes,'ملاحظات جديدة');assert.equal(final.attachments.length,2);assert.equal(final.source,'كشف المحاسب.xlsx');
  vm.runInContext("cloudRevisions=new Map([['a',1]])",context);
- reply=[{body:[{access_role:'editor'}]},{body:Array.from({length:500},(_,i)=>({id:i===0?'a':'page-'+i,revision:2,data:{description:'latest'}}))},{ok:false,status:500,body:{message:'network failure'}}];
+ reply=[{body:Array.from({length:500},(_,i)=>({id:i===0?'a':'page-'+i,revision:2,data:{description:'latest'}}))},{ok:false,status:500,body:{message:'network failure'}}];
  await assert.rejects(vm.runInContext('cloudState()',context),/network failure/);
  assert.equal(vm.runInContext("cloudRevisions.get('a')",context),1);
  assert.equal(vm.runInContext("cloudRevisions.size",context),1);
- context.document={querySelector:()=>({close(){},hidden:false})};context.visible=[];context.editing=null;context.render=()=>{};
+ context.document={querySelector:()=>({close(){},reset(){},hidden:false})};context.visible=[];context.editing=null;context.render=()=>{};
  let releaseRefresh,refreshCount=0;
  context.fetch=async url=>{if(url.includes('grant_type=refresh_token')){refreshCount++;return new Promise(resolve=>{releaseRefresh=()=>resolve({ok:true,status:200,json:async()=>({access_token:'renewed',refresh_token:'r2',expires_in:3600,user:{id:'user-id'}})})})}return {ok:true,status:200,json:async()=>[]}};
  vm.runInContext("cloudSession={access_token:'expired',refresh_token:'r1',expires_at:0,user:{id:'user-id'}}",context);
@@ -45,7 +45,7 @@ vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publi
  assert.equal(vm.runInContext('cloudSession',context),null);
  releaseRefresh();await rejected;
  assert.equal(vm.runInContext('cloudSession',context),null);
- console.log('PASS: unapproved accounts cannot request ledger, authenticated headers, revision conflicts and save response');
+ console.log('PASS: no session cannot request ledger; authenticated owner filter, headers, revision conflicts and save response');
  console.log('PASS: new-record attachment and edited-record attachment preserve every saved field');
  console.log('PASS: interrupted multi-page refresh cannot advance revisions while leaving stale records');
  console.log('PASS: concurrent calls refresh once; late refresh never restores a signed-out session');
