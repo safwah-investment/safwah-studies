@@ -10,7 +10,7 @@ function populateAccounts(select,placeholder){
  const first=document.createElement('option');first.value='';first.textContent=placeholder;select.append(first);
  for(const [group,names] of financeAccounts){const element=document.createElement('optgroup');element.label=group;for(const name of names){const option=document.createElement('option');option.value=name;option.textContent=name;element.append(option)}select.append(element)}
 }
-function accountBankVisibility(){const field=document.querySelector('#bank-field'),account=document.querySelector('#form [name=account]');field.hidden=account.value!=='حساب البنك الجاري';field.querySelector('input').required=!field.hidden;}
+function accountBankVisibility(){const field=document.querySelector('#bank-field'),account=document.querySelector('#form [name=account]');field.hidden=account.value!=='حساب البنك الجاري';field.querySelector('input').required=!field.hidden;if(field.hidden)field.querySelector('input').value='';}
 populateAccounts(document.querySelector('#account-filter'),'جميع الحسابات');
 populateAccounts(document.querySelector('#form [name=account]'),'غير مصنف — تحديد لاحقًا');
 document.querySelector('#form [name=account]').onchange=accountBankVisibility;
