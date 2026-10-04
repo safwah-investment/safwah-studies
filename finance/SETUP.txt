@@ -9,6 +9,9 @@
 3. في إعدادات Auth فعّل تأكيد البريد، واضبط Site URL وRedirect URLs:
    https://safwah-investment.github.io/safwah-studies/finance/
    واضبط الحد الأدنى لكلمة المرور 12 حرفًا.
+   اضبط SMTP لإرسال تأكيد البريد للبريدين المصرّح بهما؛ خدمة البريد الافتراضية
+   في Supabase تقصر الإرسال على أعضاء فريق المشروع:
+   https://supabase.com/docs/guides/auth/auth-smtp
 4. ضع Project URL والمفتاح العام publishable/anon في cloud-config.js.
    لا تضع service_role أو secret key في المستودع أو الصفحة.
 5. سجّل كل مدير من صفحة الدخول وأكّد البريد:

@@ -1,6 +1,6 @@
 begin;
 -- Run once in your Supabase project's SQL editor.
--- Registration NEVER assigns administrator privileges.
+-- Only explicitly allowlisted, verified email addresses receive administrator access.
 create table public.finance_admin_invites(email text primary key);
 alter table public.finance_admin_invites enable row level security;
 revoke all on public.finance_admin_invites from public,anon,authenticated;
