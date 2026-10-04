@@ -2,7 +2,7 @@
 function paidAmount(r){return r.payments.reduce((s,p)=>s+p.amount,0)}
 function selectRecords(records,f={}){
  const q=String(f.query||'').trim().toLocaleLowerCase('ar');
- return records.filter(r=>(!q||[r.description,r.party,r.reference,r.kind].join(' ').toLocaleLowerCase('ar').includes(q))&&(!f.month||String(r.date||'').startsWith(f.month))&&(!f.kind||r.kind===f.kind)&&(!f.review||!r.reviewed)&&(!f.settlement||(f.settlement==='paid'?paidAmount(r)===r.amount:f.settlement==='partial'?paidAmount(r)>0&&paidAmount(r)<r.amount:paidAmount(r)===0))).sort((a,b)=>{
+ return records.filter(r=>(!q||[r.description,r.party,r.reference,r.kind,r.account,r.bankName].join(' ').toLocaleLowerCase('ar').includes(q))&&(!f.month||String(r.date||'').startsWith(f.month))&&(!f.kind||r.kind===f.kind)&&(!f.account||r.account===f.account)&&(!f.review||!r.reviewed)&&(!f.settlement||(f.settlement==='paid'?paidAmount(r)===r.amount:f.settlement==='partial'?paidAmount(r)>0&&paidAmount(r)<r.amount:paidAmount(r)===0))).sort((a,b)=>{
  if(f.sort==='amount')return b.amount-a.amount;
  if(f.sort==='remaining')return (b.amount-paidAmount(b))-(a.amount-paidAmount(a));
  const order=String(b.date||'').localeCompare(String(a.date||''));

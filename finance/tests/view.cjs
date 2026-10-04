@@ -7,6 +7,11 @@ const records=[
 {id:'c',date:'',description:'عهدة',kind:'عهدة نقدية',amount:2000,payments:[],reviewed:false,attachments:[]}
 ];
 const original=JSON.stringify(records);
+records[0].account='حساب البنك الجاري';records[0].bankName='بنك تجريبي';
+assert.equal(selectRecords(records,{account:'حساب البنك الجاري'}).length,1);
+assert.equal(selectRecords(records,{account:'إنترنت وهاتف'}).length,0);
+assert.equal(selectRecords(records,{query:'بنك تجريبي'}).length,1);
+delete records[0].account;delete records[0].bankName;
 assert.deepEqual(summarizeRecords(records),{incoming:4000,outgoing:5000,due:6000,owed:2000,reviewCount:2,reviewAmount:12000,openCount:2});
 assert.deepEqual(selectRecords(records,{month:'2026-10'}).map(r=>r.id),['a']);
 assert.equal(selectRecords(records,{query:' صفوة '}).length,1);

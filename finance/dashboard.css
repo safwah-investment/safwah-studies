@@ -1,5 +1,6 @@
 /* Compact workspace using Safwah's existing green, gold and Cairo identity. */
 [hidden]{display:none!important}.auth-panel{max-width:520px;margin:36px auto;padding:28px;background:white;border:1px solid #dce3dc;border-radius:12px}.auth-panel form{display:grid;gap:16px}.account-actions{max-width:1320px;margin:20px auto 0;padding:0 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.account-cell{white-space:normal;min-width:170px}
 :root{background:#f4f6f3;color:#243d30}
 header.safwah-header{min-height:0;background:#043418;padding:0 4% 24px;border-bottom:3px solid #cba42c}
 .brandbar{min-height:84px}.brand-title{text-align:right;padding:8px 0}.brand-title h1{font-size:30px;margin:0 0 4px}.english-brand{font-size:14px;color:#dac678}.brand-title>p:last-child{font-size:13px;margin:6px 0}
