@@ -1,10 +1,13 @@
 begin;
+create schema if not exists finance_private;
+revoke all on schema finance_private from public,anon;
+grant usage on schema finance_private to authenticated;
 -- Run once in your Supabase project's SQL editor.
 -- Only explicitly allowlisted, verified email addresses receive administrator access.
-create table public.finance_admin_invites(email text primary key);
-alter table public.finance_admin_invites enable row level security;
-revoke all on public.finance_admin_invites from public,anon,authenticated;
-insert into public.finance_admin_invites(email) values
+create table finance_private.finance_admin_invites(email text primary key);
+alter table finance_private.finance_admin_invites enable row level security;
+revoke all on finance_private.finance_admin_invites from public,anon,authenticated;
+insert into finance_private.finance_admin_invites(email) values
 ('eltahirsaad3@gmail.com'),('ahmed@safwah-group.com');
 create table public.finance_admins(user_id uuid primary key references auth.users(id));
 alter table public.finance_admins enable row level security;
@@ -12,19 +15,19 @@ create policy "Read own administrator membership" on public.finance_admins
  for select to authenticated using(user_id=(select auth.uid()));
 revoke all on public.finance_admins from anon,authenticated;
 grant select on public.finance_admins to authenticated;
-create function public.activate_finance_admin() returns trigger
+create function finance_private.activate_finance_admin() returns trigger
 language plpgsql security definer set search_path='' as $$
 begin
  if new.email_confirmed_at is not null and exists(
- select 1 from public.finance_admin_invites where email=lower(new.email))
+ select 1 from finance_private.finance_admin_invites where email=lower(new.email))
  then insert into public.finance_admins(user_id) values(new.id) on conflict do nothing;
  else delete from public.finance_admins where user_id=new.id;
  end if;
  return new;
 end $$;
-revoke all on function public.activate_finance_admin() from public,anon,authenticated;
+revoke all on function finance_private.activate_finance_admin() from public,anon,authenticated;
 create trigger activate_verified_finance_admin after insert or update of email,email_confirmed_at on auth.users
-for each row execute function public.activate_finance_admin();
+for each row execute function finance_private.activate_finance_admin();
 create table public.finance_records(
  id uuid primary key, data jsonb not null, revision integer not null default 1,
  updated_at timestamptz not null default now(),
@@ -39,7 +42,7 @@ create policy "Administrators read records" on public.finance_records for select
  using(exists(select 1 from public.finance_admins where user_id=(select auth.uid())));
 revoke all on public.finance_records from anon,authenticated;
 grant select on public.finance_records to authenticated;
-create or replace function public.save_finance_record(record_id uuid,record_data jsonb,expected_revision integer)
+create or replace function finance_private.save_finance_record(record_id uuid,record_data jsonb,expected_revision integer)
 returns integer language plpgsql security definer set search_path='' as $$
 declare next_revision integer; payment jsonb; total_paid numeric:=0;
 begin
@@ -67,6 +70,12 @@ begin
  if next_revision is null then raise exception 'STALE_RECORD'; end if;
  return next_revision;
 end $$;
+revoke all on function finance_private.save_finance_record(uuid,jsonb,integer) from public,anon;
+grant execute on function finance_private.save_finance_record(uuid,jsonb,integer) to authenticated;
+create function public.save_finance_record(record_id uuid,record_data jsonb,expected_revision integer)
+returns integer language sql security invoker set search_path='' as $
+ select finance_private.save_finance_record(record_id,record_data,expected_revision);
+$;
 revoke all on function public.save_finance_record(uuid,jsonb,integer) from public,anon;
 grant execute on function public.save_finance_record(uuid,jsonb,integer) to authenticated;
 insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types)

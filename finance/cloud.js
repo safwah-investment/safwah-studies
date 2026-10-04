@@ -1,34 +1,53 @@
 // Optional Supabase adapter. Existing local records and database remain untouched.
 const cloudConfig=window.SAFWAH_CLOUD||{};
 const cloudEnabled=Boolean(cloudConfig.url||cloudConfig.publishableKey);
-let cloudSession=null,cloudRevisions=new Map();
+let cloudSession=null,cloudRevisions=new Map(),cloudSessionEpoch=0,refreshTask=null;
 function cloudHeaders(){return {apikey:cloudConfig.publishableKey,...(cloudSession?{Authorization:'Bearer '+cloudSession.access_token}:{}),'Content-Type':'application/json'}}
 async function cloudRequest(path,options={}){
+ const epoch=cloudSessionEpoch;
  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(cloudConfig.url))throw Error('إعداد خدمة الحفظ غير صالح');
  if(cloudSession&&cloudSession.expires_at<Date.now()/1000+60){
- const r=await fetch(cloudConfig.url+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:cloudConfig.publishableKey,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:cloudSession.refresh_token})});
+ if(!refreshTask){
+ let task;task=(async()=>{
+ const session=cloudSession;
+ const r=await fetch(cloudConfig.url+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:cloudConfig.publishableKey,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:session.refresh_token})});
+ if(epoch!==cloudSessionEpoch||cloudSession!==session)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
  if(!r.ok){await cloudSignOut();throw Error('انتهت جلسة الدخول. سجل الدخول مجددًا')}
- const d=await r.json();cloudSession={...d,expires_at:Date.now()/1000+d.expires_in};
+ const d=await r.json();
+ if(epoch!==cloudSessionEpoch||cloudSession!==session)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
+ cloudSession={...d,expires_at:Date.now()/1000+d.expires_in};
+ })().finally(()=>{if(refreshTask===task)refreshTask=null});refreshTask=task;
  }
+ await refreshTask;
+ }
+ if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
  const response=await fetch(cloudConfig.url+path,{...options,headers:{...cloudHeaders(),...options.headers}});
+ if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
  if(!response.ok){let d={};try{d=await response.json()}catch{}throw Error(d.message==='STALE_RECORD'?'تم تعديل الحركة من جهاز آخر. حدّث الصفحة قبل تعديلها.':response.status===401?'سجل الدخول مجددًا':response.status===403?'الحساب غير مخوّل للوصول إلى المالية':d.msg||d.message||'تعذر الاتصال بخدمة الحفظ')}
- return response.status===204?null:response.json();
+ const data=response.status===204?null:await response.json();
+ if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
+ return data;
 }
 async function cloudSignOut(){
- if(cloudSession)try{await fetch(cloudConfig.url+'/auth/v1/logout',{method:'POST',headers:cloudHeaders()})}catch{}
- cloudSession=null;cloudRevisions.clear();records=[];visible=[];editing=null;render();document.querySelector('#editor').close();document.querySelector('#ledger').hidden=true;document.querySelector('#auth-panel').hidden=false;document.querySelector('#account-actions').hidden=true;
+ const headers=cloudSession?cloudHeaders():null;
+ cloudSessionEpoch++;cloudSession=null;refreshTask=null;cloudRevisions.clear();records=[];visible=[];editing=null;render();document.querySelector('#editor').close();document.querySelector('#ledger').hidden=true;document.querySelector('#auth-panel').hidden=false;document.querySelector('#account-actions').hidden=true;
+ if(headers)try{await fetch(cloudConfig.url+'/auth/v1/logout',{method:'POST',headers})}catch{}
 }
 async function cloudState(){
  if(!cloudSession)throw Error('سجّل دخول المدير لعرض الحركات');
  const permission=await cloudRequest('/rest/v1/finance_admins?select=user_id&user_id=eq.'+encodeURIComponent(cloudSession.user.id));
  if(!permission.length)throw Error('حسابك مسجل، وينتظر تفعيل صلاحية المدير من مالك النظام');
- const result=[];let start=0;
- while(true){const page=await cloudRequest('/rest/v1/finance_records?select=id,data,revision&order=id.asc',{headers:{Range:start+'-'+(start+499),'Range-Unit':'items'}});for(const row of page){cloudRevisions.set(row.id,row.revision);result.push({...row.data,id:row.id})}if(page.length<500)break;start+=500}
+ const result=[],nextRevisions=new Map();let start=0;
+ while(true){const page=await cloudRequest('/rest/v1/finance_records?select=id,data,revision&order=id.asc',{headers:{Range:start+'-'+(start+499),'Range-Unit':'items'}});for(const row of page){nextRevisions.set(row.id,row.revision);result.push({...row.data,id:row.id})}if(page.length<500)break;start+=500}
+ cloudRevisions=nextRevisions;
  return {records:result,token:'cloud'};
 }
 async function cloudSave(record,revision){
  const saved=await cloudRequest('/rest/v1/rpc/save_finance_record',{method:'POST',body:JSON.stringify({record_id:record.id,record_data:record,expected_revision:revision})});
- cloudRevisions.set(record.id,saved);return {ok:true,record};
+ cloudRevisions.set(record.id,saved);
+ const index=records.findIndex(r=>r.id===record.id);
+ if(index<0)records.push(record);else records[index]=record;
+ return {ok:true,record};
 }
 async function cloudPost(path,p){
  if(!cloudSession)throw Error('سجل الدخول أولًا');
@@ -37,7 +56,7 @@ async function cloudPost(path,p){
  if(!p.description.trim()||!amount)throw Error('أدخل البيان والمبلغ');
  if(payments.reduce((s,x)=>s+x.amount,0)>amount)throw Error('السداد يتجاوز قيمة الحركة');
  const previous=records.find(r=>r.id===p.id);
- return cloudSave({...p,id:previous?.id||crypto.randomUUID(),amount,payments,attachments:previous?.attachments||[]},previous?cloudRevisions.get(previous.id):0);
+ return cloudSave({...previous,...p,id:previous?.id||crypto.randomUUID(),amount,payments,attachments:previous?.attachments||[]},previous?cloudRevisions.get(previous.id):0);
  }
  const previous=records.find(r=>r.id===p.id);if(!previous)throw Error('احفظ الحركة أولًا');
  if(!/^(JVBERi0|iVBORw0KGgo|\/9j\/)/.test(p.content))throw Error('المسموح PDF وPNG وJPEG');
@@ -62,7 +81,7 @@ if(cloudEnabled){
  document.querySelector('footer').textContent='تُحفظ الحركات مركزيًا بعد الضغط على حفظ. العملة: الريال السعودي.';
  document.querySelector('#auth-form').onsubmit=async event=>{
  event.preventDefault();const form=event.currentTarget,status=document.querySelector('#auth-status'),button=form.querySelector('button');button.disabled=true;status.textContent='';
- try{const d=await cloudRequest('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:form.elements.email.value,password:form.elements.password.value})});cloudSession={...d,expires_at:Date.now()/1000+d.expires_in};form.elements.password.value='';await load();document.querySelector('#auth-panel').hidden=true;document.querySelector('#ledger').hidden=false;document.querySelector('#account-actions').hidden=false;document.querySelector('#account-email').textContent=d.user.email}catch(error){status.textContent=error.message}finally{button.disabled=false}
+ try{const d=await cloudRequest('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:form.elements.email.value,password:form.elements.password.value})});cloudSessionEpoch++;cloudSession={...d,expires_at:Date.now()/1000+d.expires_in};form.elements.password.value='';await load();document.querySelector('#auth-panel').hidden=true;document.querySelector('#ledger').hidden=false;document.querySelector('#account-actions').hidden=false;document.querySelector('#account-email').textContent=d.user.email}catch(error){status.textContent=error.message}finally{button.disabled=false}
  };
  document.querySelector('#register').onclick=async()=>{
  const form=document.querySelector('#auth-form'),status=document.querySelector('#auth-status');
@@ -72,19 +91,18 @@ if(cloudEnabled){
  document.querySelector('#signout').onclick=cloudSignOut;
  document.querySelector('#migrate-local').onclick=async()=>{
  if(!confirm('نقل سجلات ومرفقات هذا المتصفح إلى مساحة صفوة الخاصة في Supabase؟ ستبقى النسخة المحلية محفوظة.'))return;
- const button=document.querySelector('#migrate-local');button.disabled=true;let count=0;
+ const button=document.querySelector('#migrate-local');button.disabled=true;let count=0,sourceCount=0;
  try{
  const local=(await readStore('records'))||[];
  for(const r of local){
  const existing=records.find(x=>x.id===r.id);
  if(existing&&!existing.localMigrationPending)continue;
- if(r.source)throw Error('يوجد سجل له كشف مصدر محلي. أرفقه يدويًا قبل النقل.');
  const attachments=[...(existing?.attachments||[])];
  for(const attachment of r.attachments){
  const file=await readStore('file:'+attachment.id);if(!file)throw Error('مرفق محلي مفقود: '+attachment.name);
  if(!attachments.some(x=>x.id===attachment.id))attachments.push({...attachment,path:r.id+'/'+crypto.randomUUID()});
  }
- let migrated=existing||{...r,attachments:[],localMigrationPending:true};
+ let migrated=existing||{...r,attachments:[],localMigrationPending:true,...(r.source?{sourceUnavailable:true}:{})};
  if(!existing)await cloudSave(migrated,0);
  for(const attachment of attachments){
  if(migrated.attachments.some(x=>x.id===attachment.id))continue;
@@ -95,9 +113,9 @@ if(cloudEnabled){
  await cloudSave(migrated,cloudRevisions.get(r.id));
  }
  const complete={...migrated};delete complete.localMigrationPending;
- await cloudSave(complete,cloudRevisions.get(r.id));count++;
+ await cloudSave(complete,cloudRevisions.get(r.id));count++;if(complete.sourceUnavailable)sourceCount++;
  }
- await load();alert('تم نقل '+count+' حركة. النسخة المحلية لم تتغير.');
+ await load();alert('تم نقل '+count+' حركة. النسخة المحلية لم تتغير.'+(sourceCount?' · '+sourceCount+' حركة لها كشف مصدر محلي؛ أرفق نسخة الكشف من الجهاز الأصلي.':''));
  }catch(e){await load().catch(()=>{});alert('توقف النقل: '+e.message+' · النسخة المحلية محفوظة.')}finally{button.disabled=false}
  };
  document.querySelector('#refresh-cloud').onclick=async()=>{try{await load()}catch(e){alert(e.message)}};
