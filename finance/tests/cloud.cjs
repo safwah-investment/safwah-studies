@@ -1,13 +1,13 @@
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
 let calls=[],reply=[];
-const context={records:[],cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},fetch:async(url,options)=>{calls.push({url,options});const x=reply.shift();if(!x)throw Error('Unexpected request');return {ok:x.ok!==false,status:x.status||200,json:async()=>x.body}},Date,Map,Boolean,Error,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
+const context={records:[],cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},fetch:async(url,options)=>{calls.push({url,options});const x=reply.shift();if(!x)throw Error('Unexpected request');return {ok:x.ok!==false,status:x.status||200,json:async()=>x.body}},Date,Map,Boolean,Error,URLSearchParams,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
 vm.createContext(context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../cloud.js'),'utf8'),context);
-vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publishableKey='public-key';cloudSession={access_token:'user-token',expires_at:Date.now()/1000+3600,user:{id:'user-id'}}",context);
+vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publishableKey='public-key';cloudSession={access_token:'user-token',expires_at:Date.now()/1000+3600,user:{id:'user-id',email:'editor@example.com'}}",context);
 (async()=>{
- reply=[{body:[]}];
- await assert.rejects(vm.runInContext('cloudState()',context),/تفعيل صلاحية المدير/);
- assert.equal(calls.length,1);assert.ok(!calls[0].url.includes('finance_records'));
- calls=[];reply=[{body:[{user_id:'user-id'}]},{body:[{id:'a',revision:2,data:{description:'صفوة',amount:100}}]}];
+ reply=[{body:[]},{body:[]}];
+ await assert.rejects(vm.runInContext('cloudState()',context),/اعتماد مالك المشروع/);
+ assert.equal(calls.length,2);assert.ok(calls.every(call=>!call.url.includes('finance_records')));
+ calls=[];reply=[{body:[{access_role:'editor'}]},{body:[{id:'a',revision:2,data:{description:'صفوة',amount:100}}]}];
  const state=await vm.runInContext('cloudState()',context);
  assert.equal(state.records[0].description,'صفوة');assert.equal(calls[1].options.headers.Authorization,'Bearer user-token');
  reply=[{ok:false,status:400,body:{message:'STALE_RECORD'}}];
@@ -28,7 +28,7 @@ vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publi
  const final=JSON.parse(calls[2].options.body).record_data;
  assert.equal(final.description,'البيان المعدل');assert.equal(final.amount,12050);assert.equal(final.reviewed,true);assert.equal(final.account,'إنترنت وهاتف');assert.equal(final.notes,'ملاحظات جديدة');assert.equal(final.attachments.length,2);assert.equal(final.source,'كشف المحاسب.xlsx');
  vm.runInContext("cloudRevisions=new Map([['a',1]])",context);
- reply=[{body:[{user_id:'user-id'}]},{body:Array.from({length:500},(_,i)=>({id:i===0?'a':'page-'+i,revision:2,data:{description:'latest'}}))},{ok:false,status:500,body:{message:'network failure'}}];
+ reply=[{body:[{access_role:'editor'}]},{body:Array.from({length:500},(_,i)=>({id:i===0?'a':'page-'+i,revision:2,data:{description:'latest'}}))},{ok:false,status:500,body:{message:'network failure'}}];
  await assert.rejects(vm.runInContext('cloudState()',context),/network failure/);
  assert.equal(vm.runInContext("cloudRevisions.get('a')",context),1);
  assert.equal(vm.runInContext("cloudRevisions.size",context),1);
