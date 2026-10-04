@@ -3,6 +3,7 @@
 .auth-label{display:inline-block;color:#627366;font-size:12px;margin-bottom:10px}.auth-panel input{width:100%}.auth-panel #auth-status{margin:0;overflow-wrap:anywhere}.access-role{font-size:12px;background:#e8efe9;color:#244a34;padding:6px 10px;border-radius:7px}.guest-notice{font-size:12px;background:#fff9e9;border-right:3px solid #cba42c;padding:12px;color:#655230}
 #account-name{overflow-wrap:anywhere;min-width:0}
 .account-cell{white-space:normal;min-width:170px}
+.payment-section{margin:22px 0;padding:18px;background:#f5f8f3;border:1px solid #dce3dc;border-radius:10px}.payment-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.payment-heading h3{margin:0 0 12px}.payment-heading .button{font-size:11px;margin-bottom:12px}.payment-section input{width:100%;text-align:left}.payment-link-actions{display:flex;gap:10px;flex-wrap:wrap}.payment-link-actions .button[aria-disabled=true]{opacity:.5;cursor:default;pointer-events:none}.record-actions{white-space:normal;min-width:160px}.record-actions .button,.record-actions button{font-size:11px;margin:3px 0}.payment-button{background:#043418;color:white}.payment-stale{letter-spacing:0;color:#8a651e;font-size:10px}
 :root{background:#f4f6f3;color:#243d30}
 header.safwah-header{min-height:0;background:#043418;padding:0 4% 24px;border-bottom:3px solid #cba42c}
 .brandbar{min-height:84px}.brand-title{text-align:right;padding:8px 0}.brand-title h1{font-size:30px;margin:0 0 4px}.english-brand{font-size:14px;color:#dac678}.brand-title>p:last-child{font-size:13px;margin:6px 0}

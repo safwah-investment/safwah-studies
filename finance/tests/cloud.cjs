@@ -1,7 +1,7 @@
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
 let calls=[],reply=[];
-const context={records:[],localStorage:{getItem(){return null},setItem(){},removeItem(){}},cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},fetch:async(url,options)=>{calls.push({url,options});const x=reply.shift();if(!x)throw Error('Unexpected request');return {ok:x.ok!==false,status:x.status||200,json:async()=>x.body}},Date,Map,Boolean,Error,URLSearchParams,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
-vm.createContext(context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../cloud.js'),'utf8'),context);
+const context={records:[],localStorage:{getItem(){return null},setItem(){},removeItem(){}},cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},fetch:async(url,options)=>{calls.push({url,options});const x=reply.shift();if(!x)throw Error('Unexpected request');return {ok:x.ok!==false,status:x.status||200,json:async()=>x.body}},Date,Map,Boolean,Error,URL,URLSearchParams,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
+vm.createContext(context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../payments.js'),'utf8'),context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../cloud.js'),'utf8'),context);
 vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publishableKey='public-key';cloudSession={access_token:'user-token',expires_at:Date.now()/1000+3600,user:{id:'user-id',email:'editor@example.com'}}",context);
 (async()=>{
  vm.runInContext('cloudSession=null',context);
@@ -15,7 +15,7 @@ vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publi
  reply=[{body:3}];await vm.runInContext("cloudSave({id:'a'},2)",context);
  assert.equal(vm.runInContext("cloudRevisions.get('a')",context),3);
  context.records=[];calls=[];reply=[{body:1},{body:{}},{body:2}];
- const added=await vm.runInContext("cloudPost('/api/save',{description:'فاتورة جديدة',amount:'100.00',kind:'مصروف',payments:[],reviewed:false,account:'كهرباء ومياه'})",context);
+ const added=await vm.runInContext("cloudPost('/api/save',{description:'فاتورة جديدة',amount:'100.00',kind:'إيراد',payments:[],reviewed:false,account:'إيرادات المبيعات / الخدمات',paymentUrl:'https://sa.myfatoorah.com/pay?invoice=test-1'})",context);
  context.newId=added.record.id;
  await vm.runInContext("cloudPost('/api/upload',{id:newId,name:'test.pdf',content:'JVBERi0xLjQ='})",context);
  assert.equal(context.records.length,1);
@@ -23,16 +23,17 @@ vm.runInContext("cloudConfig.url='https://example.supabase.co';cloudConfig.publi
  assert.equal(JSON.parse(calls[2].options.body).expected_revision,1);
  context.records[0].source='كشف المحاسب.xlsx';
  calls=[];reply=[{body:3},{body:{}},{body:4}];
- await vm.runInContext("cloudPost('/api/save',{id:newId,description:'البيان المعدل',amount:'120.50',kind:'مصروف',payments:[],reviewed:true,account:'إنترنت وهاتف',notes:'ملاحظات جديدة'})",context);
+ await vm.runInContext("cloudPost('/api/save',{id:newId,description:'البيان المعدل',amount:'120.50',kind:'إيراد',payments:[],reviewed:true,account:'إنترنت وهاتف',notes:'ملاحظات جديدة',paymentUrl:'https://sa.myfatoorah.com/pay?invoice=test-1'})",context);
  await vm.runInContext("cloudPost('/api/upload',{id:newId,name:'second.pdf',content:'JVBERi0xLjQ='})",context);
  const final=JSON.parse(calls[2].options.body).record_data;
  assert.equal(final.description,'البيان المعدل');assert.equal(final.amount,12050);assert.equal(final.reviewed,true);assert.equal(final.account,'إنترنت وهاتف');assert.equal(final.notes,'ملاحظات جديدة');assert.equal(final.attachments.length,2);assert.equal(final.source,'كشف المحاسب.xlsx');
+ assert.deepEqual(final.paymentLink,{url:'https://sa.myfatoorah.com/pay?invoice=test-1',amountHalalas:10000});assert.equal(vm.runInContext('paymentLinkState(records[0]).stale',context),true);assert.equal(final.paymentUrl,undefined);
  vm.runInContext("cloudRevisions=new Map([['a',1]])",context);
  reply=[{body:Array.from({length:500},(_,i)=>({id:i===0?'a':'page-'+i,revision:2,data:{description:'latest'}}))},{ok:false,status:500,body:{message:'network failure'}}];
  await assert.rejects(vm.runInContext('cloudState()',context),/network failure/);
  assert.equal(vm.runInContext("cloudRevisions.get('a')",context),1);
  assert.equal(vm.runInContext("cloudRevisions.size",context),1);
- context.document={querySelector:()=>({close(){},reset(){},hidden:false})};context.visible=[];context.editing=null;context.render=()=>{};
+ context.document={querySelector:()=>({close(){},reset(){},removeAttribute(){},setAttribute(){},hidden:false})};context.visible=[];context.editing=null;context.render=()=>{};
  let releaseRefresh,refreshCount=0;
  context.fetch=async url=>{if(url.includes('grant_type=refresh_token')){refreshCount++;return new Promise(resolve=>{releaseRefresh=()=>resolve({ok:true,status:200,json:async()=>({access_token:'renewed',refresh_token:'r2',expires_in:3600,user:{id:'user-id'}})})})}return {ok:true,status:200,json:async()=>[]}};
  vm.runInContext("cloudSession={access_token:'expired',refresh_token:'r1',expires_at:0,user:{id:'user-id'}}",context);
