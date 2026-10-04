@@ -1,8 +1,8 @@
 -- Transactional checks: nothing is persisted, and no email is sent.
 begin;
 insert into auth.users(id,email,email_confirmed_at,aud,role,created_at,updated_at)
-values(gen_random_uuid(),'ahmed@safwah-group.com',now(),'authenticated','authenticated',now(),now());
-select set_config('request.jwt.claim.sub',(select id::text from auth.users where email='ahmed@safwah-group.com'),true);
+values(gen_random_uuid(),'afalsuhaimi@gmail.com',now(),'authenticated','authenticated',now(),now());
+select set_config('request.jwt.claim.sub',(select id::text from auth.users where email='afalsuhaimi@gmail.com'),true);
 set local role authenticated;
 do $$
 declare test_id uuid:=gen_random_uuid(); payload jsonb; version integer;
