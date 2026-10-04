@@ -23,7 +23,7 @@ async function cloudRequest(path,options={}){
  if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
  const response=await fetch(cloudConfig.url+path,{...options,headers:{...cloudHeaders(),...options.headers}});
  if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
- if(!response.ok){let d={};try{d=await response.json()}catch{}throw Error(d.message==='STALE_RECORD'?'تم تعديل الحركة من جهاز آخر. حدّث الصفحة قبل تعديلها.':response.status===401?'سجل الدخول مجددًا':response.status===403?'الحساب غير مخوّل للوصول إلى المالية':d.msg||d.message||'تعذر الاتصال بخدمة الحفظ')}
+ if(!response.ok){let d={};try{d=await response.json()}catch{}const authErrors={email_not_confirmed:'افتح رسالة تأكيد البريد أولًا، ثم سجّل الدخول.',invalid_credentials:'البريد أو كلمة المرور غير صحيحة.',email_address_not_authorized:'إرسال التأكيد لهذا البريد يحتاج استكمال إعداد خدمة البريد.',weak_password:'اختر كلمة مرور أقوى من 12 حرفًا على الأقل.'};throw Error(d.message==='STALE_RECORD'?'تم تعديل الحركة من جهاز آخر. حدّث الصفحة قبل تعديلها.':authErrors[d.code]||(response.status===429?'بلغت الخدمة حد المحاولات. انتظر قبل المحاولة مجددًا.':response.status===401?'سجل الدخول مجددًا':response.status===403?'الحساب غير مخوّل للوصول إلى المالية':d.msg||d.message||'تعذر الاتصال بخدمة الحفظ'))}
  const data=response.status===204?null:await response.json();
  if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة الدخول. سجّل الدخول مجددًا');
  return data;
@@ -79,14 +79,19 @@ if(cloudEnabled){
  document.querySelector('.pill').textContent='● مساحة المدير الخاصة';
  document.querySelector('aside').textContent='الحفظ المركزي مفعّل. السجلات والمرفقات متاحة للمدير المخوّل فقط بعد تسجيل الدخول.';
  document.querySelector('footer').textContent='تُحفظ الحركات مركزيًا بعد الضغط على حفظ. العملة: الريال السعودي.';
+ if(cloudConfig.registrationEmail){document.querySelector('#registration-note').textContent='التسجيل الأول متاح لبريد مالك المشروع المعتمد. اختر كلمة مرور من 12 حرفًا على الأقل، ثم أكّد بريدك وسجّل الدخول.';document.querySelector('#auth-form').elements.email.value=cloudConfig.registrationEmail}
  document.querySelector('#auth-form').onsubmit=async event=>{
  event.preventDefault();const form=event.currentTarget,status=document.querySelector('#auth-status'),button=form.querySelector('button');button.disabled=true;status.textContent='';
  try{const d=await cloudRequest('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email:form.elements.email.value,password:form.elements.password.value})});cloudSessionEpoch++;cloudSession={...d,expires_at:Date.now()/1000+d.expires_in};form.elements.password.value='';await load();document.querySelector('#auth-panel').hidden=true;document.querySelector('#ledger').hidden=false;document.querySelector('#account-actions').hidden=false;document.querySelector('#account-email').textContent=d.user.email}catch(error){status.textContent=error.message}finally{button.disabled=false}
  };
  document.querySelector('#register').onclick=async()=>{
- const form=document.querySelector('#auth-form'),status=document.querySelector('#auth-status');
+ const form=document.querySelector('#auth-form'),status=document.querySelector('#auth-status'),button=document.querySelector('#register');
+ if(button.disabled)return;
  if(!form.reportValidity())return;
- try{await cloudRequest('/auth/v1/signup',{method:'POST',body:JSON.stringify({email:form.elements.email.value,password:form.elements.password.value})});form.elements.password.value='';status.textContent='راجع بريدك لتأكيد الحساب. تفعيل المالية متاح للبريد المصرّح به فقط.'}catch(e){status.textContent=e.message}
+ const email=form.elements.email.value.trim().toLowerCase();
+ if(cloudConfig.registrationEmail&&email!==cloudConfig.registrationEmail.toLowerCase()){status.textContent='التسجيل الحالي متاح لبريد مالك المشروع المعتمد فقط.';return}
+ button.disabled=true;form.querySelector('button').disabled=true;status.textContent='جارٍ إرسال رسالة التأكيد…';
+ try{await cloudRequest('/auth/v1/signup',{method:'POST',body:JSON.stringify({email,password:form.elements.password.value})});form.elements.password.value='';status.textContent='راجع بريدك، بما فيه الرسائل غير المرغوب فيها، وأكّد الحساب. ثم عد هنا واضغط دخول المدير.'}catch(e){status.textContent=e.message}finally{button.disabled=false;form.querySelector('button').disabled=false}
  };
  document.querySelector('#signout').onclick=cloudSignOut;
  document.querySelector('#migrate-local').onclick=async()=>{

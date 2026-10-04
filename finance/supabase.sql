@@ -8,7 +8,7 @@ create table finance_private.finance_admin_invites(email text primary key);
 alter table finance_private.finance_admin_invites enable row level security;
 revoke all on finance_private.finance_admin_invites from public,anon,authenticated;
 insert into finance_private.finance_admin_invites(email) values
-('eltahirsaad3@gmail.com'),('ahmed@safwah-group.com');
+('afalsuhaimi@gmail.com'),('eltahirsaad3@gmail.com'),('ahmed@safwah-group.com');
 create table public.finance_admins(user_id uuid primary key references auth.users(id));
 alter table public.finance_admins enable row level security;
 create policy "Read own administrator membership" on public.finance_admins
