@@ -79,6 +79,7 @@ if(cloudEnabled){
  document.querySelector('.pill').textContent='● مساحة المدير الخاصة';
  document.querySelector('aside').textContent='الحفظ المركزي مفعّل. السجلات والمرفقات متاحة للمدير المخوّل فقط بعد تسجيل الدخول.';
  document.querySelector('footer').textContent='تُحفظ الحركات مركزيًا بعد الضغط على حفظ. العملة: الريال السعودي.';
+ document.querySelector('#auth-form').addEventListener('invalid',()=>{document.querySelector('#auth-status').textContent='أدخل بريدًا صحيحًا وكلمة مرور من 12 حرفًا على الأقل. لم يُرسل الطلب بعد.'},true);
  if(cloudConfig.registrationEmail){document.querySelector('#registration-note').textContent='التسجيل الأول متاح لبريد مالك المشروع المعتمد. اختر كلمة مرور من 12 حرفًا على الأقل، ثم أكّد بريدك وسجّل الدخول.';document.querySelector('#auth-form').elements.email.value=cloudConfig.registrationEmail}
  document.querySelector('#auth-form').onsubmit=async event=>{
  event.preventDefault();const form=event.currentTarget,status=document.querySelector('#auth-status'),button=form.querySelector('button'),register=document.querySelector('#register');if(button.disabled)return;button.disabled=true;register.disabled=true;status.textContent='';
