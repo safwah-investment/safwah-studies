@@ -6,7 +6,7 @@ const cloudAuthStorageKey='safwah-finance-guest-session-v1';
 function cloudCanWrite(){return Boolean(cloudSession?.user?.id)}
 function cloudPersistSession(session=cloudSession){if(session)localStorage.setItem(cloudAuthStorageKey,JSON.stringify({project:cloudConfig.url,user_id:session.user.id,access_token:session.access_token,refresh_token:session.refresh_token,expires_at:session.expires_at||Date.now()/1000+(Number(session.expires_in)>0?Number(session.expires_in):3600)}))}
 function cloudRemoveStoredSession(session,sameUser=false){const saved=JSON.parse(localStorage.getItem(cloudAuthStorageKey)||'null');if(session&&saved&&saved.project===cloudConfig.url&&(saved.refresh_token===session.refresh_token||(sameUser&&saved.user_id===session.user?.id)))localStorage.removeItem(cloudAuthStorageKey)}
-function cloudClearWorkspace(){cloudRevisions.clear();records=[];visible=[];editing=null;render();document.querySelector('#editor').close();document.querySelector('#form').reset();document.querySelector('#payments').innerHTML='';document.querySelector('#attachments').innerHTML='';document.querySelector('#error').textContent='';document.querySelector('#account-name').textContent='';document.querySelector('#workspace-name').textContent='مساحة المستخدم';document.querySelector('#ledger').hidden=true;document.querySelector('#account-actions').hidden=true}
+function cloudClearWorkspace(){cloudRevisions.clear();records=[];visible=[];editing=null;render();document.querySelector('#editor').close();document.querySelector('#form').reset();document.querySelector('#payments').innerHTML='';document.querySelector('#attachments').innerHTML='';document.querySelector('#error').textContent='';document.querySelector('#account-name').textContent='';document.querySelector('#workspace-name').textContent='مساحة المستخدم';document.querySelector('#payment-section').hidden=true;document.querySelector('#payment-url-open').removeAttribute('href');document.querySelector('#payment-url-open').setAttribute('aria-disabled','true');document.querySelector('#payment-url-copy').disabled=true;document.querySelector('#payment-link-status').textContent='';document.querySelector('#ledger').hidden=true;document.querySelector('#account-actions').hidden=true}
 function cloudHeaders(){return {apikey:cloudConfig.publishableKey,...(cloudSession?{Authorization:'Bearer '+cloudSession.access_token}:{}),'Content-Type':'application/json'}}
 async function cloudRequest(path,options={}){
  const epoch=cloudSessionEpoch;
@@ -64,7 +64,7 @@ async function cloudPost(path,p){
  if(!p.description.trim()||!amount)throw Error('أدخل البيان والمبلغ');
  if(payments.reduce((s,x)=>s+x.amount,0)>amount)throw Error('السداد يتجاوز قيمة الحركة');
  const previous=records.find(r=>r.id===p.id);
- return cloudSave({...previous,...p,id:previous?.id||crypto.randomUUID(),amount,payments,attachments:previous?.attachments||[]},previous?cloudRevisions.get(previous.id):0);
+ return cloudSave(preparePaymentRecord(previous,{...previous,...p,id:previous?.id||crypto.randomUUID(),amount,payments,attachments:previous?.attachments||[]}),previous?cloudRevisions.get(previous.id):0);
  }
  const previous=records.find(r=>r.id===p.id);if(!previous)throw Error('احفظ الحركة أولًا');
  if(!/^(JVBERi0|iVBORw0KGgo|\/9j\/)/.test(p.content))throw Error('المسموح PDF وPNG وJPEG');

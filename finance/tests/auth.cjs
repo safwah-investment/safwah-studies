@@ -1,7 +1,7 @@
 const vm=require('node:vm'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 let calls=[],reply=[],allowLogout=false;
 const nodes=new Map(),stored=new Map([['safwah-finance-v1','original-local-ledger']]);
-function node(selector){if(!nodes.has(selector))nodes.set(selector,{hidden:false,disabled:false,textContent:'',innerHTML:'',close(){},reset(){},querySelector(){return node(selector+' button')}});return nodes.get(selector)}
+function node(selector){if(!nodes.has(selector))nodes.set(selector,{hidden:false,disabled:false,textContent:'',innerHTML:'',close(){},reset(){},removeAttribute(key){delete this[key]},setAttribute(key,value){this[key]=value},querySelector(){return node(selector+' button')}});return nodes.get(selector)}
 const form=node('#auth-form');form.elements={display_name:{value:'My workspace'}};form.reportValidity=()=>true;
 const context={records:[],visible:[],editing:null,document:{querySelector:node},localStorage:{getItem:key=>stored.get(key)||null,setItem:(key,value)=>stored.set(key,value),removeItem:key=>stored.delete(key)},confirm:()=>allowLogout,cents:v=>Math.round(Number(v)*100),atob,Uint8Array,window:{SAFWAH_CLOUD:{}},render(){node('#rows').innerHTML=context.records.map(record=>record.description).join(',')},fetch:async(url,options)=>{calls.push({url,options});const response=reply.shift();if(!response)throw Error('Unexpected request');return {ok:response.ok!==false,status:response.status||200,json:async()=>response.body}},Date,Map,Boolean,Error,encodeURIComponent,JSON,crypto:require('node:crypto').webcrypto};
 vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(__dirname,'../cloud.js'),'utf8'),context);
