@@ -1,8 +1,9 @@
 // Minimal OOXML workbook with UTF-8 inline strings. No CDN or external processing.
 function excelWorkbook(rows,options={}){
+ if(typeof options==='string')options={sheetName:options};
  const encoder=new TextEncoder(),xml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
  const col=n=>{let s='';for(n++;n;n=Math.floor((n-1)/26))s=String.fromCharCode(65+(n-1)%26)+s;return s};
- const headerRow=Math.max(1,Math.min(rows.length,Number(options.headerRow)||1)),lastDataRow=Math.max(headerRow,Math.min(rows.length,Number(options.lastDataRow)||rows.length)),sheetName=String(options.sheetName||'سجل الحركات').slice(0,31);
+ const headerRow=Math.max(1,Math.min(rows.length,Number(options.headerRow)||1)),lastDataRow=Math.max(headerRow,Math.min(rows.length,Number(options.lastDataRow)||rows.length)),sheetName=(String(options.sheetName||'سجل الحركات').replace(/[\\/?*\[\]:]/g,' ').slice(0,31)||'صفوة');
  const sheet=rows.map((row,i)=>'<row r="'+(i+1)+'">'+row.map((v,j)=>typeof v==='number'?'<c r="'+col(j)+(i+1)+'"><v>'+v+'</v></c>':'<c r="'+col(j)+(i+1)+'" t="inlineStr"><is><t xml:space="preserve">'+xml(v)+'</t></is></c>').join('')+'</row>').join('');
  const files={
  '[Content_Types].xml':'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>',

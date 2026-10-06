@@ -6,7 +6,7 @@ const cloudAuthStorageKey='safwah-finance-guest-session-v1';
 function cloudCanWrite(){return Boolean(cloudSession?.user?.id)}
 function cloudPersistSession(session=cloudSession){if(session)localStorage.setItem(cloudAuthStorageKey,JSON.stringify({project:cloudConfig.url,user_id:session.user.id,access_token:session.access_token,refresh_token:session.refresh_token,expires_at:session.expires_at||Date.now()/1000+(Number(session.expires_in)>0?Number(session.expires_in):3600)}))}
 function cloudRemoveStoredSession(session,sameUser=false){const saved=JSON.parse(localStorage.getItem(cloudAuthStorageKey)||'null');if(session&&saved&&saved.project===cloudConfig.url&&(saved.refresh_token===session.refresh_token||(sameUser&&saved.user_id===session.user?.id)))localStorage.removeItem(cloudAuthStorageKey)}
-function cloudClearWorkspace(){cloudRevisions.clear();records=[];visible=[];editing=null;render();document.querySelector('#editor').close();document.querySelector('#form').reset();document.querySelector('#payments').innerHTML='';document.querySelector('#attachments').innerHTML='';document.querySelector('#error').textContent='';document.querySelector('#account-name').textContent='';document.querySelector('#workspace-name').textContent='مساحة المستخدم';document.querySelector('#payment-section').hidden=true;document.querySelector('#payment-url-open').removeAttribute('href');document.querySelector('#payment-url-open').setAttribute('aria-disabled','true');document.querySelector('#payment-url-copy').disabled=true;document.querySelector('#payment-link-status').textContent='';document.querySelector('#ledger').hidden=true;document.querySelector('#account-actions').hidden=true}
+function cloudClearWorkspace(){if(window.journalClear)window.journalClear();document.querySelector('#migrate-local').disabled=false;cloudRevisions.clear();records=[];visible=[];editing=null;render();document.querySelector('#editor').close();document.querySelector('#form').reset();document.querySelector('#payments').innerHTML='';document.querySelector('#attachments').innerHTML='';document.querySelector('#error').textContent='';document.querySelector('#account-name').textContent='';document.querySelector('#workspace-name').textContent='مساحة المستخدم';document.querySelector('#payment-section').hidden=true;document.querySelector('#payment-url-open').removeAttribute('href');document.querySelector('#payment-url-open').setAttribute('aria-disabled','true');document.querySelector('#payment-url-copy').disabled=true;document.querySelector('#payment-link-status').textContent='';document.querySelector('#ledger').hidden=true;document.querySelector('#account-actions').hidden=true}
 function cloudHeaders(){return {apikey:cloudConfig.publishableKey,...(cloudSession?{Authorization:'Bearer '+cloudSession.access_token}:{}),'Content-Type':'application/json'}}
 async function cloudRequest(path,options={}){
  const epoch=cloudSessionEpoch;
@@ -85,7 +85,7 @@ function cloudWorkspaceName(){const name=cloudSession?.user?.user_metadata?.disp
 function cloudApplyWorkspace(){document.querySelector('#account-name').textContent=cloudWorkspaceName();document.querySelector('#workspace-name').textContent=cloudWorkspaceName();document.querySelector('#migrate-local').hidden=!cloudCanWrite()}
 async function cloudShowSession(){
  const epoch=cloudSessionEpoch;
- try{await load();if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة المساحة.');cloudApplyWorkspace();document.querySelector('#auth-panel').hidden=true;document.querySelector('#ledger').hidden=false;document.querySelector('#account-actions').hidden=false}
+ try{await load();if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة المساحة.');cloudApplyWorkspace();document.querySelector('#auth-panel').hidden=true;document.querySelector('#ledger').hidden=false;document.querySelector('#account-actions').hidden=false;if(window.journalLoad)await window.journalLoad()}
  catch(error){if(epoch===cloudSessionEpoch){document.querySelector('#ledger').hidden=true;document.querySelector('#auth-panel').hidden=false;document.querySelector('#auth-status').textContent=error.message}throw error}
 }
 async function cloudAcceptSession(candidate){
@@ -132,45 +132,53 @@ if(cloudEnabled){
  document.querySelector('a[href="/file/source"]').remove();
  document.querySelector('#ledger').hidden=true;document.querySelector('#auth-panel').hidden=false;
  document.querySelector('.pill').textContent='● مساحة المستخدم الخاصة';
- document.querySelector('aside').textContent='هذه الحركات والمرفقات تخص مساحتك وحدك. احتفظ بنسخة احتياطية؛ العودة إلى مساحة الضيف تتطلب بقاء بيانات هذا المتصفح.';
+ document.querySelector('#ledger aside').textContent='هذه الحركات والمرفقات تخص مساحتك وحدك. احتفظ بنسخة احتياطية؛ العودة إلى مساحة الضيف تتطلب بقاء بيانات هذا المتصفح.';
  document.querySelector('footer').textContent='تُحفظ الحركات مركزيًا بعد الضغط على حفظ. العملة: الريال السعودي.';
  document.querySelector('#auth-form').onsubmit=event=>{event.preventDefault();cloudCreateWorkspace()};
  document.querySelector('#signout').onclick=()=>cloudSignOut(true);
  document.querySelector('#migrate-local').onclick=async()=>{
  if(!cloudCanWrite()){alert('أنشئ مساحتك الخاصة قبل نقل الحركات.');return}
  if(!confirm('نقل سجلات ومرفقات هذا المتصفح إلى مساحتك الخاصة؟ ستبقى النسخة المحلية محفوظة.'))return;
- const button=document.querySelector('#migrate-local');button.disabled=true;let count=0,sourceCount=0;
+ const button=document.querySelector('#migrate-local'),epoch=cloudSessionEpoch,owner=cloudSession.user.id;
+ const current=()=>epoch===cloudSessionEpoch&&owner===cloudSession?.user?.id;
+ const check=()=>{if(!current())throw Error('تغيّرت جلسة المساحة. توقف نقل البيانات المحلية.')};
+ const read=async key=>{check();const value=await readStore(key);check();return value};
+ const save=async(record,revision)=>{check();const value=await cloudSave(record,revision);check();return value};
+ button.disabled=true;let count=0,sourceCount=0;
  try{
- const local=(await readStore('records'))||[];
+ const local=(await read('records'))||[];
  for(const r of local){
+ check();
  const existing=records.find(x=>x.id===r.id);
  if(existing&&!existing.localMigrationPending)continue;
  const attachments=[...(existing?.attachments||[])];
  for(const attachment of r.attachments){
- const file=await readStore('file:'+attachment.id);if(!file)throw Error('مرفق محلي مفقود: '+attachment.name);
+ const file=await read('file:'+attachment.id);if(!file)throw Error('مرفق محلي مفقود: '+attachment.name);
  if(!attachments.some(x=>x.id===attachment.id))attachments.push({...attachment,path:r.id+'/'+crypto.randomUUID()});
  }
  let migrated=existing||{...r,attachments:[],localMigrationPending:true,...(r.source?{sourceUnavailable:true}:{})};
- if(!existing)await cloudSave(migrated,0);
+ if(!existing)await save(migrated,0);
  for(const attachment of attachments){
  if(migrated.attachments.some(x=>x.id===attachment.id))continue;
- const file=await readStore('file:'+attachment.id),raw=atob(file.content),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
+ const file=await read('file:'+attachment.id),raw=atob(file.content),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
  const type=file.content.startsWith('JVBER')?'application/pdf':file.content.startsWith('iVBOR')?'image/png':'image/jpeg';
+ check();
  await cloudRequest('/storage/v1/object/finance-documents/'+attachment.path,{method:'POST',headers:{'Content-Type':type},body:bytes});
+ check();
  migrated={...migrated,attachments:[...migrated.attachments,attachment]};
- await cloudSave(migrated,cloudRevisions.get(r.id));
+ await save(migrated,cloudRevisions.get(r.id));
  }
  const complete={...migrated};delete complete.localMigrationPending;
- await cloudSave(complete,cloudRevisions.get(r.id));count++;if(complete.sourceUnavailable)sourceCount++;
+ await save(complete,cloudRevisions.get(r.id));count++;if(complete.sourceUnavailable)sourceCount++;
  }
- await load();alert('تم نقل '+count+' حركة. النسخة المحلية لم تتغير.'+(sourceCount?' · '+sourceCount+' حركة لها كشف مصدر محلي؛ أرفق نسخة الكشف من الجهاز الأصلي.':''));
- }catch(e){await load().catch(()=>{});alert('توقف النقل: '+e.message+' · النسخة المحلية محفوظة.')}finally{button.disabled=false}
+ check();await load();check();alert('تم نقل '+count+' حركة. النسخة المحلية لم تتغير.'+(sourceCount?' · '+sourceCount+' حركة لها كشف مصدر محلي؛ أرفق نسخة الكشف من الجهاز الأصلي.':''));
+ }catch(e){if(!current())return;await load().catch(()=>{});if(current())alert('توقف النقل: '+e.message+' · النسخة المحلية محفوظة.')}finally{if(current())button.disabled=false}
  };
  document.querySelector('#refresh-cloud').onclick=async()=>{try{await cloudShowSession()}catch(e){alert(e.message)}};
  document.addEventListener('click',async event=>{
  const a=event.target.closest('a');if(!a)return;const href=a.getAttribute('href');
  if(href==='/backup'){
- event.preventDefault();const epoch=cloudSessionEpoch;try{await load();const files={},snapshot=[...records];for(const r of snapshot)for(const file of r.attachments){const blob=await cloudFile(file.path);const content=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=reject;reader.readAsDataURL(blob)});if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة المساحة.');files[file.id]={name:file.name,content}}if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة المساحة.');downloadBlob(new Blob([JSON.stringify({format:'safwah-finance-v1',records:snapshot,files})],{type:'application/json'}),'safwah-cloud-backup.json')}catch(e){alert('تعذر إنشاء النسخة: '+e.message)}return;
+ event.preventDefault();const epoch=cloudSessionEpoch;try{await load();const journals=await journalState(),files={},snapshot=[...records];for(const r of snapshot)for(const file of r.attachments){const blob=await cloudFile(file.path);const content=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=reject;reader.readAsDataURL(blob)});if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة المساحة.');files[file.id]={name:file.name,content}}if(epoch!==cloudSessionEpoch)throw Error('تغيّرت جلسة المساحة.');downloadBlob(new Blob([JSON.stringify({format:'safwah-finance-v1',records:snapshot,files,journals})],{type:'application/json'}),'safwah-cloud-backup.json')}catch(e){alert('تعذر إنشاء النسخة: '+e.message)}return;
  }
  if(!href?.startsWith('/file/'))return;
  event.preventDefault();try{const file=records.flatMap(r=>r.attachments).find(f=>f.id===decodeURIComponent(href.slice(6)));if(!file?.path)throw Error('هذا المرفق محلي؛ انقله من الجهاز الأصلي');downloadBlob(await cloudFile(file.path),file.name)}catch(e){alert(e.message)}
