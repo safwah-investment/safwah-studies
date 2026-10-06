@@ -12,7 +12,7 @@ function updatePaymentControls(){
  return state;
  }catch(error){status.textContent=error.message;return null}
 }
-async function load(){const d=await financeState();records=d.records;token=d.token;render()}
+async function load(){const d=await financeState();records=d.records;token=d.token;render();if(window.journalSourceRefresh)window.journalSourceRefresh()}
 function render(){
  if(typeof renderAccountingReports==='function')renderAccountingReports();
  visible=selectRecords(records,{query:$('#search').value,month:$('#month').value,kind:$('#filter').value,account:$('#account-filter').value,review:$('#review').checked,settlement:$('#settlement').value,sort:$('#sort').value});
