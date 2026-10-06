@@ -20,6 +20,25 @@ document.querySelectorAll('.sector-pick').forEach(b=>b.addEventListener('click',
 q('#email').addEventListener('click',()=>{location.href='mailto:Info@Safwah-group.com?subject='+encodeURIComponent(words('طلب دراسة استثمارية','Investment study enquiry'))+'&body='+encodeURIComponent(brief());q('#form-status').textContent=words('أكمل الإرسال في تطبيق البريد. إذا لم يفتح، انسخ الملخص وأرسله إلى بريد صفوة الاستثمارية.','Complete sending in your email app. If it does not open, copy your brief and email Safwah Investment.');});
 q('#copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(brief());q('#form-status').textContent=words('تم نسخ الملخص. يمكنك إرساله إلى الفريق.','Brief copied. You can now share it with the team.');}catch{q('#form-status').textContent=words('تعذر النسخ. استخدم تنزيل الملخص أو حدد النص وانسخه.','Copy unavailable. Download the brief or select and copy its text.');}});
 q('#download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob(['\ufeff'+brief()],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='safwah-study-brief.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);q('#form-status').textContent=words('تم تجهيز الملخص للتنزيل؛ لم يُرسل إلى الفريق.','Brief prepared for download; it has not been sent to the team.');});
+q('#whatsapp').addEventListener('click',()=>{const url='https://wa.me/966505189070?text='+encodeURIComponent(brief());window.open(url,'_blank','noopener,noreferrer');q('#form-status').textContent=words('تم فتح واتساب مع ملخص الطلب. راجع الرسالة ثم أرسلها.','WhatsApp opened with your brief. Review the message, then send it.');});
 translate();
 
 q('#motion-toggle').addEventListener('click',()=>{const paused=q('.hero').classList.toggle('paused');q('#motion-toggle').setAttribute('aria-pressed',String(paused));q('#motion-toggle').dataset.ar=paused?'تشغيل حركة الصور':'إيقاف حركة الصور';q('#motion-toggle').dataset.en=paused?'Resume slideshow':'Pause slideshow';q('#motion-toggle').textContent=q('#motion-toggle').dataset[lang];});
+
+
+const navLinks=[...document.querySelectorAll('header nav a[href^="#"]')];
+const navTargets=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+navLinks.forEach(a=>a.addEventListener('click',()=>{navLinks.forEach(x=>x.classList.remove('active'));a.classList.add('active');}));
+if('IntersectionObserver' in window&&navTargets.length){
+ const observer=new IntersectionObserver(entries=>{
+  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(!visible)return;
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
+ },{rootMargin:'-20% 0px -65% 0px',threshold:[0,.15,.35,.6]});
+ navTargets.forEach(el=>observer.observe(el));
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+ const target=document.querySelector(a.getAttribute('href'));if(!target)return;
+ e.preventDefault();target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ history.replaceState(null,'',a.getAttribute('href'));
+}));
