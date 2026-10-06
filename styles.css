@@ -15,3 +15,19 @@ header nav a:hover,.text-link:hover{opacity:.82}
 .card:hover{transform:translateY(-2px)}
 section[id],main[id]{scroll-margin-top:24px}
 @media(prefers-reduced-motion:reduce){header nav a,.button,button,.text-link,.card{transition:none}.card:hover{transform:none}}
+
+
+/* Mobile navigation and utility actions */
+#nav-toggle{display:none;color:white;border-color:#ffffff55;background:#043418cc}
+.whatsapp-float{position:fixed;inset-inline-end:18px;bottom:18px;z-index:20;background:#043418;color:white;border:1px solid #ffffff33;border-radius:999px;padding:11px 18px;font-weight:700;box-shadow:0 10px 30px #00000026}
+.whatsapp-float:hover{filter:brightness(1.08)}
+@media(max-width:900px){
+ header{align-items:flex-start}
+ #nav-toggle{display:inline-flex;align-items:center;justify-content:center;position:relative;z-index:7}
+ #site-nav{display:none;position:absolute;top:82px;inset-inline:18px;background:#043418f7;padding:18px;border:1px solid #ffffff22;border-radius:14px;box-shadow:0 18px 40px #0003;flex-direction:column;align-items:stretch;gap:4px}
+ #site-nav.open{display:flex}
+ #site-nav a,#site-nav button{padding:10px 8px;text-align:start}
+}
+@media(max-width:650px){
+ .whatsapp-float{inset-inline-end:12px;bottom:12px;padding:10px 14px;font-size:13px}
+}
