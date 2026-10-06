@@ -14,6 +14,7 @@ function updatePaymentControls(){
 }
 async function load(){const d=await financeState();records=d.records;token=d.token;render()}
 function render(){
+ if(typeof renderAccountingReports==='function')renderAccountingReports();
  visible=selectRecords(records,{query:$('#search').value,month:$('#month').value,kind:$('#filter').value,account:$('#account-filter').value,review:$('#review').checked,settlement:$('#settlement').value,sort:$('#sort').value});
  const totals=summarizeRecords(visible);
  $('#scope').textContent='المعروض: '+visible.length+' من '+records.length+' حركة · '+($('#month').value||'جميع الأشهر')+' · المؤشرات حسب التصفية الحالية';
