@@ -42,3 +42,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',
  e.preventDefault();target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
  history.replaceState(null,'',a.getAttribute('href'));
 }));
+
+
+const navToggle=q('#nav-toggle'),siteNav=q('#site-nav');
+if(navToggle&&siteNav){
+ const closeNav=()=>{siteNav.classList.remove('open');navToggle.setAttribute('aria-expanded','false');};
+ navToggle.addEventListener('click',()=>{const open=siteNav.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(open));});
+ siteNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
+ document.addEventListener('click',e=>{if(!siteNav.contains(e.target)&&e.target!==navToggle)closeNav();});
+}
