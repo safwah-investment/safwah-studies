@@ -164,3 +164,105 @@ html[dir="ltr"] .filter select{background-position:calc(100% - 18px) 19px,calc(1
 @media(max-width:360px){.header-nav{gap:6px;font-size:10px}.hero h1{font-size:30px}.brand strong{font-size:12px}.card-actions button,.card-actions a{font-size:10px}.property-price{font-size:21px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 @media print{.site-header,.filters,.map-aside,.contact-banner,.detail-overlay,.compare-tray,.btn,.card-actions,footer{display:none!important}.cards{grid-template-columns:1fr}.property-card{page-break-inside:avoid;break-inside:avoid}.hero{min-height:auto;background:#fff;color:#142e44}.hero-copy p{color:#142e44}.hero-panel{border:1px solid #ddd}.hero-panel *{color:#142e44!important}.hero-layout{min-height:auto;padding:20px 0}.wrap{width:100%}}
+
+
+/* SAFWAH INVESTMENT — identity system derived from supplied investment brochure.
+   Source palette: warm gold, graphite monogram, ink/navy, white, restrained detail. */
+@font-face{font-family:"Safwah Cairo";src:url("../assets/cairo.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+:root{--gold:#cda728;--gold-light:#f1db87;--navy:#183750;--navy-deep:#102739;--text:#263845;--cream:#fafaf7;--shadow:0 12px 34px rgba(25,40,51,.08)}
+html[lang="ar"] body{font-family:"Safwah Cairo",Tahoma,Arial,sans-serif}
+html[lang="en"] body{font-family:"Segoe UI",Arial,sans-serif}
+body{font-feature-settings:"kern" 1}
+.site-header{box-shadow:0 3px 20px rgba(20,32,39,.04);border-bottom:2px solid rgba(205,167,40,.7)}
+.brand{gap:12px}
+.brand-emblem{width:52px;height:57px;flex:0 0 52px;background:#f7f7f3;border:1px solid #eeece3;border-radius:9px;display:grid;place-items:center}
+.brand-emblem img{width:35px;height:43px;object-fit:contain}
+.brand-lockup{display:flex;flex-direction:column;align-items:flex-start;gap:1px;line-height:1.4;white-space:nowrap}
+.brand-lockup strong{font-size:18px;line-height:1.3;color:#424748;font-weight:850;letter-spacing:0}
+.brand-lockup b{font-family:Arial,sans-serif;color:#5a5a57;letter-spacing:.9px;font-size:11px;line-height:1.35}
+.brand-lockup small{font-size:10px;color:#b18c24;letter-spacing:.2px;font-weight:700;line-height:1.5}
+html[dir="ltr"] .brand-lockup{align-items:flex-start}
+.header-nav a{position:relative}
+.header-nav a:hover{color:#94721b}
+.header-nav a:hover:after{content:"";position:absolute;background:var(--gold);height:2px;bottom:-7px;right:0;left:0;border-radius:2px}
+.language-btn{border-color:#d3c597;color:#6d5926}
+.language-btn:hover{background:#f9f4e6}
+.hero{background:linear-gradient(113deg,#122d44 0%,#1a3c56 66%,#19374c 100%);border-bottom:5px solid #cda728}
+.hero:after{content:"";position:absolute;width:min(36vw,440px);height:85%;bottom:-23%;inset-inline-end:-3%;background:url("./brand-mark.svg") center/contain no-repeat;opacity:.043;pointer-events:none;transform:rotate(-13deg)}
+.hero-copy{position:relative;z-index:1}
+.hero-brand-signature{display:inline-flex;align-items:center;gap:11px;padding:7px 14px 7px 9px;background:#fffcf3;border-radius:7px;border:1px solid rgba(205,167,40,.48);margin-bottom:24px;box-shadow:0 7px 25px rgba(0,0,0,.09)}
+.hero-brand-emblem{display:grid;place-items:center;width:37px;height:40px;flex:0 0 37px;border-inline-end:1px solid #ded5bc;padding-inline-end:7px}
+.hero-brand-emblem img{width:27px;height:33px;object-fit:contain}
+.hero-brand-wordmark{display:flex;flex-direction:column;line-height:1.5;gap:1px}
+.hero-brand-wordmark strong{font-family:Arial,sans-serif;font-size:12px;letter-spacing:1.5px;color:#4c5050;font-weight:800}
+.hero-brand-wordmark small{font-size:10px;font-weight:700;color:#ae8a32;letter-spacing:.6px}
+.hero h1{line-height:1.32}
+.hero-copy p{max-width:670px}
+.hero-panel{position:relative;z-index:1;border-top:3px solid var(--gold);background:rgba(255,255,255,.082)}
+.panel-brand-mark{width:32px;height:32px;border-radius:5px;background:#fffaf0;display:grid;place-items:center}
+.panel-brand-mark img{width:17px;height:23px;object-fit:contain}
+.intro-emblem{width:39px;height:43px;flex:0 0 39px;display:grid;place-items:center;background:#f8f4e7;border:1px solid #e9dfbd;border-radius:7px}
+.intro-emblem img{height:31px;width:25px}
+.section-index{color:#9e7e1d;letter-spacing:2px}
+.section-title h2:before{content:"";display:inline-block;vertical-align:middle;width:4px;height:.9em;background:var(--gold);border-radius:3px;margin-inline-end:11px}
+.btn-gold{background:var(--gold);color:#132b3d}
+.btn-gold:hover{background:#dfbb43}
+.property-card{position:relative}
+.property-card:before{content:"";position:absolute;inset-inline-start:0;top:0;height:3px;width:70px;background:var(--gold);z-index:5}
+.property-card:hover{border-color:#cda728}
+.card-serial{color:#93711a}
+.card-area-tag{background:#f8f3e3;color:#785e1e}
+.property-price{color:#17364d}
+.card-actions .detail-btn{background:var(--navy);border-color:var(--navy)}
+.map-heading h3{color:#1c4057}
+.map-aside{border-top:3px solid var(--gold)}
+.contact-banner{position:relative;background:linear-gradient(110deg,#122b40 0%,#193951 100%);border-top:4px solid #cda728;overflow:hidden}
+.contact-banner:after{content:"";position:absolute;width:280px;height:340px;bottom:-45%;inset-inline-end:-45px;background:url("./brand-mark.svg") center/contain no-repeat;opacity:.048;pointer-events:none}
+.contact-inner{position:relative;z-index:1}
+.contact-identity{display:flex;align-items:center;gap:16px}
+.contact-emblem{background:#fffcf3;border:1px solid #d4be7f;border-radius:9px;width:60px;height:65px;display:grid;place-items:center;flex:0 0 60px}
+.contact-emblem img{width:37px;height:45px;object-fit:contain}
+.contact-inner .section-index{color:var(--gold-light)}
+.contact-inner h2{margin:4px 0}
+footer{background:#0d2435;border-top:1px solid #364b55}
+.footer-brand{display:flex;gap:12px;align-items:center}
+.footer-emblem{width:50px;height:58px;display:grid;place-items:center;flex:0 0 50px;border-radius:6px;background:#faf8ef}
+.footer-emblem img{width:33px;height:40px}
+.footer-brand-type{display:flex;flex-direction:column;line-height:1.5}
+.footer-brand-type strong{font-size:17px;color:#fff;font-weight:750}
+.footer-brand-type b{font-family:Arial,sans-serif;font-size:10px;letter-spacing:1px;color:#d1c7af}
+.footer-brand-type small{font-size:10px;color:#dbba5a}
+.compare-tray{border-top:3px solid var(--gold)}
+@media(max-width:880px){
+ .brand-lockup strong{font-size:16px}
+ .brand-lockup b{font-size:10px}
+ .header-nav{gap:15px}
+ .hero:after{width:55vw;opacity:.033}
+}
+@media(max-width:620px){
+ .brand{gap:9px}
+ .brand-emblem{width:45px;height:49px;flex-basis:45px}
+ .brand-emblem img{width:29px;height:37px}
+ .brand-lockup strong{font-size:14px}
+ .brand-lockup b{font-size:9px;letter-spacing:.35px}
+ .brand-lockup small{font-size:9px}
+ .hero-brand-signature{margin-bottom:17px;padding:5px 10px 5px 7px}
+ .hero-brand-wordmark strong{font-size:10px;letter-spacing:1px}
+ .hero-brand-wordmark small{font-size:8px}
+ .hero-brand-emblem{width:30px;height:35px;flex-basis:30px}
+ .hero-brand-emblem img{width:23px;height:29px}
+ .hero h1{line-height:1.37}
+ .contact-identity{align-items:flex-start;gap:11px}
+ .contact-emblem{width:48px;height:54px;flex-basis:48px}
+ .contact-emblem img{width:30px;height:37px}
+ .footer-brand-type strong{font-size:15px}
+ .footer-brand-type b{font-size:9px}
+}
+@media(max-width:365px){
+ .brand-lockup strong{font-size:12px}
+ .brand-lockup b{font-size:8px}
+ .brand-lockup small{font-size:8px}
+ .brand-emblem{width:39px;height:45px;flex-basis:39px}
+ .brand-emblem img{width:24px;height:31px}
+ .hero-brand-signature{gap:7px}
+}
