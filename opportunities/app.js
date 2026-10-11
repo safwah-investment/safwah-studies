@@ -5,7 +5,7 @@
   var T = function (ar, en) { return { ar: ar, en: en }; };
   var properties = [
     {
-      id: 1, title: T("مخطط العزيزي – جشم", "Al-Azizi – Jashm"),
+      id: 1, title: T("مخطط العذري – جشم", "Al-Udhri – Jashm"),
       subtitle: T("شرق المدينة المنورة", "East Madinah"), zone: "east",
       type: T("قطعتان سكنيتان متجاورتان", "Two adjoining residential plots"),
       plot: T("القطعتان 386 و387", "Plots 386 and 387"),
@@ -143,7 +143,7 @@
     if (!window.L || !target || target.dataset.loaded) return;
     target.dataset.loaded = "yes";
     var m = L.map(target,{zoomControl:false,attributionControl:false,keyboard:false,dragging:false,doubleClickZoom:false,scrollWheelZoom:false,boxZoom:false, touchZoom:false,tap:false,zoomAnimation:false,fadeAnimation:false});
-    L.tileLayer(satelliteTile,{maxZoom:19,maxNativeZoom:18,crossOrigin:true}).addTo(m);
+    L.tileLayer(satelliteTile,{maxZoom:19,maxNativeZoom:18}).addTo(m);
     m.setView([p.lat,p.lng],17);
     miniOverlay(m,p);
     miniMaps.push(m);
