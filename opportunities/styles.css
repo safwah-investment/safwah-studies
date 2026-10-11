@@ -266,3 +266,9 @@ footer{background:#0d2435;border-top:1px solid #364b55}
  .brand-emblem img{width:24px;height:31px}
  .hero-brand-signature{gap:7px}
 }
+
+/* Consistent logo signature on listing imagery and property detail overlays. */
+.card-media:after{content:"";position:absolute;z-index:4;top:12px;inset-inline-end:12px;width:32px;height:38px;border:1px solid rgba(197,167,76,.65);border-radius:5px;background:#fffffff0 url("./brand-mark.svg") center/21px 28px no-repeat;box-shadow:0 3px 12px rgba(0,0,0,.15);pointer-events:none}
+.dialog-header{border-top:3px solid var(--gold)}
+.dialog-header:before{content:"";display:block;flex:0 0 24px;width:24px;height:31px;background:url("./brand-mark.svg") center/contain no-repeat}
+@media(max-width:620px){.card-media:after{width:28px;height:34px;background-size:18px 24px}.dialog-header:before{display:none}}
