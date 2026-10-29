@@ -26,8 +26,9 @@ table{width:100%;border-collapse:collapse;background:white;margin-top:22px;font-
 .gates{counter-reset:g;display:grid;gap:12px}.gate{counter-increment:g;background:white;border:1px solid var(--line);padding:18px 18px 18px 70px;position:relative}.gate:before{content:counter(g);position:absolute;left:18px;top:16px;width:36px;height:36px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;font-weight:800}
 footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-grid{display:flex;justify-content:space-between;gap:30px;align-items:center}.footer-grid img{width:160px}
 .en{display:none}html.enmode{direction:ltr}html.enmode .ar{display:none}html.enmode .en{display:inline}html.enmode .gate{padding:18px 70px 18px 18px}html.enmode .gate:before{left:auto;right:18px}
+.calc{background:#fff;border:1px solid var(--line);margin:32px 0;padding:24px}.calc h3{margin:0 0 18px}.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.calc label{display:block;color:#23412f;font-size:14px}.calc label b{float:inline-end}.calc input[type=range]{width:100%;display:block;accent-color:var(--green);margin:14px 0}.calc-results{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}.calc-results div{background:var(--sand);padding:14px;min-width:0}.calc-results small{display:block;font-size:11px;color:#526351}.calc-results strong{display:block;font-size:22px;direction:ltr;text-align:start;color:var(--green)}
 @media(max-width:900px){.hero-grid,.visuals{grid-template-columns:1fr}.stats,.fruits{grid-template-columns:repeat(2,1fr)}.three,.equipment,.scenarios{grid-template-columns:1fr 1fr}.navlinks a{display:none}.hero{min-height:auto}.hero-grid{padding:70px 0}.kiosk-card{max-width:650px}.scenario.base{transform:none}}
-@media(max-width:620px){.stats,.fruits,.three,.equipment,.scenarios,.two{grid-template-columns:1fr}.section{padding:55px 0}.hero h1{font-size:42px}.hero .lead{font-size:17px}table{font-size:12px}.equipment{gap:10px}.footer-grid{flex-direction:column;align-items:flex-start}.brand span{display:none}}
+@media(max-width:620px){.calc-grid,.calc-results{grid-template-columns:1fr 1fr}.calc{padding:16px}.calc-results strong{font-size:18px}.stats,.fruits,.three,.equipment,.scenarios,.two{grid-template-columns:1fr}.section{padding:55px 0}.hero h1{font-size:42px}.hero .lead{font-size:17px}table{font-size:12px}.equipment{gap:10px}.footer-grid{flex-direction:column;align-items:flex-start}.brand span{display:none}}
 @media print{header,.lang{display:none}.hero{min-height:520px}.section{break-inside:avoid}.cta{display:none}}
 </style>
 </head>
@@ -56,7 +57,7 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
       <p class="lead ar">دراسة استثمارية أولية لكشك Premium بمساحة لا تتجاوز 16م²، مع نموذج تشغيل صغير، قائمة محدودة، وفواكه مجمدة IQF لخفض الهدر ورفع ثبات الجودة.</p>
       <p class="lead en">An investor-oriented pre-feasibility study for a premium kiosk of up to 16 sqm, built around a compact operating model, focused menu and IQF frozen fruit to reduce waste and improve consistency.</p>
       <div class="chips">
-        <span class="chip">≤ 16 m²</span><span class="chip">SAR 1,500 / m² / year*</span><span class="chip">Base: 80 orders/day</span><span class="chip">Break-even: ≈ 55 orders/day</span>
+        <span class="chip">≤ 16 m²</span><span class="chip">SAR 1,500 / m² / year*</span><span class="chip">Base: 80 orders/day</span><span class="chip">Break-even: ≈ 63 orders/day</span>
       </div>
       <a href="#decision" class="cta"><span class="ar">عرض القرار الاستثماري</span><span class="en">View investment decision</span></a>
     </div>
@@ -98,8 +99,8 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
   <div class="stats">
     <div class="stat"><b>16 m²</b><span class="ar">المساحة القصوى المستهدفة</span><span class="en">Target maximum area</span></div>
     <div class="stat"><b>SAR 24K</b><span class="ar">إيجار سنوي محسوب عند 1,500 ريال/م²*</span><span class="en">Calculated annual rent at SAR 1,500/m²*</span></div>
-    <div class="stat"><b>≈ SAR 120K</b><span class="ar">CAPEX تقديري</span><span class="en">Indicative CAPEX</span></div>
-    <div class="stat"><b>≈ 55/day</b><span class="ar">نقطة تعادل تشغيلية تقريبية</span><span class="en">Indicative operating break-even</span></div>
+    <div class="stat"><b>≈ SAR 150K</b><span class="ar">التمويل الإجمالي: 120 ألف تأسيس + 30 ألف رأس مال عامل</span><span class="en">Total funding: 120K startup + 30K working capital</span></div>
+    <div class="stat"><b>≈ 63/day</b><span class="ar">نقطة تعادل تشغيلية تقريبية</span><span class="en">Indicative operating break-even</span></div>
   </div>
   <div class="note ar">* سعر 1,500 ريال/م² مدخل من المستثمر، ويُعامل في الدراسة كإيجار سنوي افتراضي حتى استلام عرض الإيجار الرسمي، شاملًا بيان رسوم الخدمات وأي نسبة من المبيعات والضريبة.</div>
   <div class="note en">* SAR 1,500/m² is an investor-supplied input and is treated as an annual rent assumption until the official lease offer confirms service charges, turnover rent and VAT.</div>
@@ -217,7 +218,7 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
   <p class="intro ar">الأرقام أدناه نموذج قرار أولي وليست قوائم مالية مدققة. يجب استبدال افتراضات العمالة ورسوم المول والموردين بعروض فعلية قبل الاستثمار.</p>
   <p class="intro en">The figures below are a pre-investment decision model, not audited financial statements. Labour, mall charges and supplier assumptions must be replaced with actual quotations before investment.</p>
   <div class="grid three">
-    <div class="card"><h3>CAPEX</h3><p><b style="font-size:30px;color:white">≈ SAR 120K</b><br><span class="ar">نطاق مرجعي 105–135 ألف ريال.</span><span class="en">Reference range SAR 105–135K.</span></p></div>
+    <div class="card"><h3>CAPEX</h3><p><b style="font-size:30px;color:white">≈ SAR 120K</b><br><span class="ar">إجمالي التأسيس، إضافة إلى 30 ألف سيولة تشغيلية.</span><span class="en">Startup estimate, plus SAR 30K working capital.</span></p></div>
     <div class="card"><h3>Average Ticket</h3><p><b style="font-size:30px;color:white">SAR 24</b><br><span class="ar">شامل VAT في النموذج.</span><span class="en">VAT-inclusive model assumption.</span></p></div>
     <div class="card"><h3>Variable Cost</h3><p><b style="font-size:30px;color:white">31%</b><br><span class="ar">مواد + تعبئة + هدر + رسوم دفع.</span><span class="en">Ingredients + packaging + waste + payment fees.</span></p></div>
   </div>
@@ -241,12 +242,83 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
     </tbody>
   </table>
 
-  <h2 style="margin-top:55px"><span class="ar">سيناريوهات المبيعات</span><span class="en">Sales scenarios</span></h2>
+  <h2 style="margin-top:55px"><span class="ar">مصادر التمويل والتكاليف الشهرية</span><span class="en">Funding and monthly overhead</span></h2>
+  <table><thead><tr><th><span class="ar">البند (افتراض قابل للتعديل)</span><span class="en">Line item (assumption)</span></th><th class="num">SAR</th></tr></thead><tbody>
+   <tr><td><span class="ar">تكاليف التأسيس والمخزون والاحتياطي</span><span class="en">Startup, inventory and contingency</span></td><td class="num">120,000</td></tr>
+   <tr><td><span class="ar">رأس المال العامل المخصص</span><span class="en">Working capital allocation</span></td><td class="num">30,000</td></tr>
+   <tr><th><span class="ar">إجمالي التمويل المطلوب</span><span class="en">Total funding required</span></th><th class="num">150,000</th></tr>
+  </tbody></table>
+  <table><thead><tr><th><span class="ar">المصروفات الثابتة الشهرية المفترضة</span><span class="en">Assumed monthly fixed costs</span></th><th class="num">SAR/month</th></tr></thead><tbody>
+   <tr><td><span class="ar">العمالة والتغطية التشغيلية</span><span class="en">Staffing and operating cover</span></td><td class="num">16,000</td></tr>
+   <tr><td><span class="ar">الإيجار (16 م² × 1,500 سنويًا)</span><span class="en">Rent (16 sqm × 1,500 annually)</span></td><td class="num">2,000</td></tr>
+   <tr><td><span class="ar">رسوم الخدمات والإدارة (افتراضية)</span><span class="en">Service charges / management estimate</span></td><td class="num">2,000</td></tr>
+   <tr><td><span class="ar">الكهرباء والمياه والاتصالات</span><span class="en">Utilities and connectivity</span></td><td class="num">2,000</td></tr>
+   <tr><td><span class="ar">التسويق والعروض</span><span class="en">Marketing</span></td><td class="num">2,000</td></tr>
+   <tr><td><span class="ar">صيانة وتأمين ومصروفات إدارية</span><span class="en">Maintenance, insurance and admin</span></td><td class="num">3,000</td></tr>
+   <tr><th><span class="ar">الإجمالي، شامل الإيجار</span><span class="en">Total, including rent</span></th><th class="num">27,000</th></tr>
+  </tbody></table>
+  <div class="note ar">لم يقدم المول عرضًا رسميًا للإيجار أو رسوم الخدمات. كما لم يتم التحقق من أجور العمالة أو ساعات التشغيل؛ البنود أعلاه افتراضات قابلة للتغيير. متوسط الفاتورة 24 ريالًا شامل VAT، ولذلك صافي الإيراد من الطلب 20.87 ريالًا تقريبًا، ومساهمته بعد التكاليف المتغيرة 14.40 ريالًا.</div>
+  <div class="note en">No official rent/service quotation or verified staffing schedule has been obtained. These are adjustable estimates. SAR 24 per sale includes VAT; net revenue is about SAR 20.87 per order and contribution after variable costs is SAR 14.40.</div>
+
+  <h2 style="margin-top:55px"><span class="ar">السيناريوهات السنوية المصححة</span><span class="en">Corrected annual scenarios</span></h2>
   <div class="scenarios">
-    <div class="scenario"><h3>Conservative</h3><div class="big">55/day</div><div class="bar"><span style="width:50%"></span></div><p>Collections incl. VAT ≈ SAR 481.8K/year<br>Indicative EBITDA ≈ break-even</p></div>
-    <div class="scenario base"><h3>Base Case</h3><div class="big">80/day</div><div class="bar"><span style="width:73%"></span></div><p>Collections incl. VAT ≈ SAR 700.8K/year<br>Net revenue excl. VAT ≈ SAR 609K<br><b>Indicative EBITDA ≈ SAR 132K</b></p></div>
-    <div class="scenario"><h3>Upside</h3><div class="big">110/day</div><div class="bar"><span style="width:100%"></span></div><p>Collections incl. VAT ≈ SAR 963.6K/year<br>Indicative EBITDA ≈ SAR 290K</p></div>
+    <div class="scenario"><h3><span class="ar">متحفظ</span><span class="en">Conservative</span></h3><div class="big">55/day</div><div class="bar"><span style="width:50%"></span></div><p>Sales incl. VAT: SAR 475,200<br>Net revenue: SAR 413,217<br><b>EBITDA: SAR −38,880</b></p></div>
+    <div class="scenario base"><h3><span class="ar">أساسي</span><span class="en">Base case</span></h3><div class="big">80/day</div><div class="bar"><span style="width:73%"></span></div><p>Sales incl. VAT: SAR 691,200<br>Net revenue: SAR 601,043<br><b>EBITDA: SAR 90,720</b></p></div>
+    <div class="scenario"><h3><span class="ar">متفائل</span><span class="en">Upside</span></h3><div class="big">110/day</div><div class="bar"><span style="width:100%"></span></div><p>Sales incl. VAT: SAR 950,400<br>Net revenue: SAR 826,435<br><b>EBITDA: SAR 246,240</b></p></div>
   </div>
+  <div class="note ar"><b>نقطة التعادل:</b> 27,000 ÷ (30 × 14.40) = 62.5، أي نحو <b>63 طلبًا يوميًا</b>. الصافي أعلاه هو الربح التشغيلي قبل الإهلاك والفوائد والزكاة وضريبة الدخل وأجر المالك غير المدرج.</div>
+  <div class="note en"><b>Operating break-even:</b> SAR 27,000 ÷ (30 days × SAR 14.40 contribution) = 62.5, rounded up to <b>63 orders/day</b>. EBITDA excludes depreciation, debt costs, zakat/income tax and any unbudgeted owner wage.</div>
+
+  <h2 style="margin-top:55px"><span class="ar">تحليل حساسية الإيجار والمبيعات</span><span class="en">Rent and demand sensitivity</span></h2>
+  <p class="intro ar">يقارن الجدول الربح التشغيلي السنوي عند أسعار إيجار من 1,000 إلى 3,000 ريال للمتر المربع سنويًا. تُستبدل قيمة الإيجار في التكاليف الثابتة دون إضافتها مرتين.</p>
+  <p class="intro en">Annual EBITDA under rental rates from SAR 1,000 to 3,000 per sqm/year. Rent is substituted within fixed costs, never added twice.</p>
+  <div style="overflow:auto"><table><thead><tr><th><span class="ar">إيجار المتر/سنة</span><span class="en">Rent/sqm/year</span></th><th class="num">55/day</th><th class="num">80/day</th><th class="num">110/day</th><th class="num"><span class="ar">نقطة التعادل</span><span class="en">Break-even</span></th></tr></thead>
+  <tbody>
+   <tr><td>1,000 SAR</td><td class="num">−30,880</td><td class="num">98,720</td><td class="num">254,240</td><td class="num">61/day</td></tr>
+   <tr><td><b>1,500 SAR*</b></td><td class="num">−38,880</td><td class="num"><b>90,720</b></td><td class="num">246,240</td><td class="num"><b>63/day</b></td></tr>
+   <tr><td>2,000 SAR</td><td class="num">−46,880</td><td class="num">82,720</td><td class="num">238,240</td><td class="num">65/day</td></tr>
+   <tr><td>2,500 SAR</td><td class="num">−54,880</td><td class="num">74,720</td><td class="num">230,240</td><td class="num">67/day</td></tr>
+   <tr><td>3,000 SAR</td><td class="num">−62,880</td><td class="num">66,720</td><td class="num">222,240</td><td class="num">68/day</td></tr>
+  </tbody></table></div>
+  <div class="note ar">*1,500 ريال للمتر سنويًا مجرد تقدير، وليس سعرًا معتمدًا من المول. كل زيادة قدرها 500 ريال/م²/سنة ترفع مصروف الإيجار السنوي بمقدار 8,000 ريال، وتخفض EBITDA بالمقدار نفسه ما لم تتغير المبيعات.</div>
+  <div class="note en">*SAR 1,500/sqm/year is an estimate, not a confirmed mall quote. Each SAR 500/sqm/year increase adds SAR 8,000 annual rent and reduces EBITDA by that amount, all else equal.</div>
+
+  <div class="calc">
+    <h3><span class="ar">حاسبة تفاعلية: اختبار افتراضات المشروع</span><span class="en">Interactive investment assumptions</span></h3>
+    <div class="calc-grid">
+     <label><span class="ar">الطلبات يوميًا</span><span class="en">Daily orders</span> <b id="daily-v">80</b><input id="daily" type="range" min="30" max="160" step="5" value="80"></label>
+     <label><span class="ar">متوسط الفاتورة شامل الضريبة</span><span class="en">VAT-inclusive ticket</span> <b id="ticket-v">24</b><input id="ticket" type="range" min="16" max="34" step="1" value="24"></label>
+     <label><span class="ar">إيجار المتر سنويًا</span><span class="en">Annual rent/sqm</span> <b id="rent-v">1,500</b><input id="rent" type="range" min="750" max="4000" step="250" value="1500"></label>
+     <label><span class="ar">التكاليف الثابتة الأخرى شهريًا</span><span class="en">Other monthly fixed costs</span> <b id="other-v">25,000</b><input id="other" type="range" min="18000" max="40000" step="1000" value="25000"></label>
+    </div>
+    <div class="calc-results">
+     <div><small><span class="ar">الإيراد السنوي دون ضريبة</span><span class="en">Annual net revenue</span></small><strong id="rev-out">601,043</strong></div>
+     <div><small><span class="ar">الربح التشغيلي السنوي</span><span class="en">Annual EBITDA</span></small><strong id="profit-out">90,720</strong></div>
+     <div><small><span class="ar">نقطة التعادل اليومية</span><span class="en">Daily break-even</span></small><strong id="be-out">63</strong></div>
+     <div><small><span class="ar">الإيجار السنوي</span><span class="en">Annual rent</span></small><strong id="rent-out">24,000</strong></div>
+    </div>
+    <p class="caption ar">تُحسب الأرباح دون VAT على المبيعات، وبنسبة تكلفة متغيرة ثابتة 31%. تغيير الأشرطة لا يغيّر افتراضات التدفقات النقدية الخمسية الثابتة أدناه.</p>
+    <p class="caption en">Sales VAT is excluded; variable costs remain 31%. The sliders do not recalculate the fixed five-year projection below.</p>
+  </div>
+
+  <h2 style="margin-top:55px"><span class="ar">التدفقات النقدية المتوقعة لخمس سنوات</span><span class="en">Five-year cash flow projection</span></h2>
+  <p class="intro ar">افتراض الحالة الأساسية 80 طلبًا يوميًا في السنة الأولى، نمو الإيرادات والمصروفات الثابتة بنسبة 3% سنويًا، ثبات هامش التكلفة المتغيرة 31%، إحلال معدات 5 آلاف ريال سنويًا من السنة الثالثة، واسترداد رأس مال عامل 30 ألف ريال في السنة الخامسة. لا تُفترض قيمة بيع نهائية للكشك.</p>
+  <p class="intro en">Base case starts at 80 orders/day, revenue and fixed costs grow 3% annually, variable cost stays at 31%, replacement capex of SAR 5K/year starts in year 3, and SAR 30K working capital is recovered in year 5. No terminal sale proceeds assumed.</p>
+  <div style="overflow:auto"><table><thead><tr><th><span class="ar">السنة</span><span class="en">Year</span></th><th class="num"><span class="ar">الإيراد دون VAT</span><span class="en">Net revenue</span></th><th class="num">EBITDA</th><th class="num"><span class="ar">تدفق نقدي</span><span class="en">Cash flow</span></th></tr></thead><tbody>
+   <tr><td>0</td><td class="num">—</td><td class="num">—</td><td class="num">−150,000</td></tr>
+   <tr><td>1</td><td class="num">601,043</td><td class="num">90,720</td><td class="num">90,720</td></tr>
+   <tr><td>2</td><td class="num">619,075</td><td class="num">93,442</td><td class="num">93,442</td></tr>
+   <tr><td>3</td><td class="num">637,647</td><td class="num">96,245</td><td class="num">91,245</td></tr>
+   <tr><td>4</td><td class="num">656,776</td><td class="num">99,132</td><td class="num">94,132</td></tr>
+   <tr><td>5</td><td class="num">676,480</td><td class="num">102,106</td><td class="num">127,106</td></tr>
+  </tbody></table></div>
+  <div class="grid three">
+   <div class="card"><h3><span class="ar">صافي القيمة الحالية (15%)</span><span class="en">NPV (15% discount)</span></h3><p><b style="font-size:24px">≈ SAR 176,552</b></p></div>
+   <div class="card"><h3><span class="ar">الاسترداد البسيط</span><span class="en">Simple payback</span></h3><p><b style="font-size:24px">≈ 1.63 years</b></p></div>
+   <div class="card"><h3><span class="ar">التوصيف</span><span class="en">Interpretation</span></h3><p><span class="ar">نتيجة مشروطة بتحقق حجم المبيعات؛ وليست ضمانًا للأرباح.</span><span class="en">Conditional on achieving sales targets; not an earnings guarantee.</span></p></div>
+  </div>
+  <div class="note warning ar">هذه التدفقات نقدية تشغيلية مبسطة قبل التمويل والزكاة/ضريبة الدخل والتغيرات الدورية في رأس المال العامل. التقدير حساس جدًا للطلب اليومي، ولا يتضمن فترة تدرج المبيعات عند الافتتاح أو قيمة البيع النهائية. يجب إعادة الحساب عند تلقي عروض الإيجار والعمالة والموردين.</div>
+  <div class="note warning en">Simplified pre-financing and pre-tax cash flows, excluding interim working-capital changes, startup ramp-up and terminal value. Actual returns may be materially lower; refresh the model after receiving validated quotes and footfall data.</div>
   <div class="note ar">حد التسجيل الإلزامي في ضريبة القيمة المضافة لدى ZATCA هو 375,000 ريال من التوريدات الخاضعة للضريبة خلال 12 شهرًا؛ السيناريو الأساسي يتجاوز هذا المستوى، ولذلك فُصلت الضريبة عن الإيراد التشغيلي في النموذج.</div>
   <div class="note en">ZATCA's mandatory VAT registration threshold is SAR 375,000 of taxable supplies over 12 months. The base case exceeds this level, so VAT is separated from operating revenue in the model.</div>
 </div>
@@ -272,7 +344,7 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
     </div>
     <div class="card">
       <h3>Core KPIs</h3>
-      <p>Transactions/day ≥ 55 break-even target</p>
+      <p>Transactions/day ≥ 63 operating break-even</p>
       <p>Base target = 80/day</p>
       <p>Average ticket ≥ SAR 24</p>
       <p>Variable cost ≤ 31–33%</p>
@@ -294,7 +366,7 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
     <div class="gate"><b class="ar">مراجعة عقد المول</b><b class="en">Lease due diligence</b><br><span class="ar">الإيجار، VAT، رسوم الخدمات، التأمين، ساعات التشغيل، وأي Turnover Rent.</span><span class="en">Rent, VAT, service charges, deposit, operating hours and any turnover rent.</span></div>
     <div class="gate"><b class="ar">ثلاثة عروض موردين</b><b class="en">Three supplier quotations</b><br><span class="ar">معدات + فواكه مجمدة + مواد طازجة + تغليف.</span><span class="en">Equipment + frozen fruit + fresh produce + packaging.</span></div>
     <div class="gate"><b class="ar">اختبار الوصفات</b><b class="en">Recipe test</b><br><span class="ar">حساب Cost per Cup لكل منتج بالجرام.</span><span class="en">Calculate gram-based cost per cup for each SKU.</span></div>
-    <div class="gate"><b>GO / NO-GO</b><br><span class="ar">لا يُعتمد المشروع إذا لم يُظهر الموقع قدرة واقعية على تجاوز 60 عملية يوميًا بهامش أمان فوق نقطة التعادل.</span><span class="en">Do not approve the investment unless the location demonstrates a realistic path above 60 transactions/day, providing a margin over break-even.</span></div>
+    <div class="gate"><b>GO / NO-GO</b><br><span class="ar">لا يُعتمد توقيع الإيجار قبل إثبات القدرة على بلوغ 90 طلبًا يوميًا تقريبًا كهدف تشغيلي أولي، مع نقطة تعادل 63 طلبًا في الافتراضات الأساسية.</span><span class="en">Do not sign the lease without credible evidence supporting an initial target of roughly 90 transactions/day; modeled operating break-even is 63/day.</span></div>
   </div>
   <div class="note warning ar"><b>التوصية:</b> المشروع قابل للانتقال إلى دراسة تفصيلية، لكن قرار التوقيع يجب أن ينتظر التحقق من حركة موقع الكشك الفعلية وعقد الإيجار الكامل. انخفاض الإيجار وحده لا يثبت جدوى الموقع.</div>
   <div class="note warning en"><b>Recommendation:</b> proceed to detailed validation, but do not sign the lease before validating exact-location traffic and the full lease economics. Low headline rent alone does not prove site viability.</div>
@@ -332,11 +404,20 @@ footer{background:#021f0e;color:#d6ded7;padding:38px 0;font-size:13px}.footer-gr
 <footer>
 <div class="wrap footer-grid">
   <div><img src="https://safwah-group.com/wp-content/uploads/2025/07/safwah-logo-1.png" alt="Safwah Investment"><div>Prepared by SAFWAH INVESTMENT · Madinah · Saudi Arabia · 2026</div></div>
-  <div><a href="https://safwah-group.com/" target="_blank" rel="noopener">safwah-group.com</a><br>Investor Pre-Feasibility Study · Version 1.0</div>
+  <div><a href="https://safwah-group.com/" target="_blank" rel="noopener">safwah-group.com</a><br>Investor Pre-Feasibility Study · Version 2.0 · 29 Oct 2026</div>
 </div>
 </footer>
 
 <script>
+const fmt = n => Math.round(n).toLocaleString("en-US");
+function updateModel(){
+ const d=+document.getElementById("daily").value, t=+document.getElementById("ticket").value, r=+document.getElementById("rent").value, o=+document.getElementById("other").value;
+ const rent=r*16, fixed=o*12+rent, contribution=t/1.15*.69, revenue=d*360*t/1.15, ebitda=d*360*contribution-fixed, be=Math.ceil(fixed/(360*contribution));
+ for(const [id,n] of [["daily-v",d],["ticket-v",t],["rent-v",r],["other-v",o],["rev-out",revenue],["profit-out",ebitda],["be-out",be],["rent-out",rent]]){
+  const el=document.getElementById(id); if(el)el.textContent=fmt(n);
+ }
+}
+["daily","ticket","rent","other"].forEach(id=>document.getElementById(id)?.addEventListener("input",updateModel));updateModel();
 const btn=document.getElementById("lang");
 btn.addEventListener("click",function(){
  const h=document.documentElement;
